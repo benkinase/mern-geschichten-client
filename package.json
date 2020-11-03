@@ -1,6 +1,6 @@
 {
-  "name": "frontend",
-  "proxy": "http://localhost:5000",
+  "name": "geschichtenclient",
+  "proxy": "https://geschichten.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,7 +10,6 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.5.3",
     "firebase": "^8.0.0",
-    "fuse.js": "^6.4.1",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.0.0",
     "normalize.css": "^8.0.1",
