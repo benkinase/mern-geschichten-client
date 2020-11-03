@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Philosopher:ital@1&family=Poppins:wght@300&display=swap");
+
+:root {
+  --mainBlue: #170f8b;
+  --Blue: #03042e;
+  --lightBlue: #0fa3f8;
+  --mainWhite: #f5f5ee;
+  --secondWhite: floralwhite;
+  --mainDark: #232528;
+  --mainYellow: #ffae00;
+  --secYellow: #f7bb39;
+  --lightRed: rgb(243, 21, 139);
+  --mainTransition: all 0.3s linear;
+  --mainSpacing: 0.3rem;
+  --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
+  --darkShadow: 4px 10px 5px 3px rgba(0, 0, 0, 0.5);
+  --profileColor: rgb(253, 143, 9);
+  --profileBg: rgb(190, 218, 245);
+}
+::selection {
+  color: var(--lightRed);
+}
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+.app {
+  background-color: var(--secondWhite);
+  min-height: 100vh;
+}
+.navbar {
+  background: var(--Blue);
+}
+.nav-text {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.3rem;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+/*Global*/
+.text-title {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: var(--mainSpacing);
+  text-transform: uppercase;
+}
+.blue-text {
+  color: var(--mainBlue);
+}
+.white-bg {
+  background-color: floralwhite;
+}
+.text-popins {
+  font-family: "Poppins", sans-serif;
+}
+.bold-text {
+  font-weight: 800;
+}
+.light-blue {
+  color: var(--lightBlue);
+}
+.yellow-text {
+  color: var(--mainYellow);
+}
+.red-text {
+  color: var(--lightRed);
+}
+
+.blue-bg {
+  background-color: #593a60;
+}
+.justify-body {
+  text-align: justify;
+}
+.center-content {
+  text-align: center;
+}
+.fas {
+  font-size: 1.2rem;
+  color: var(--Blue);
+  transition: var(--mainTransition);
+}
+.fas:hover {
+  color: var(--mainYellow);
+  cursor: pointer;
+}
+.underlined {
+  width: 15rem;
+  height: 0.25rem;
+  background: var(--Blue);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*buttons*/
+/* home page*/
+.primary-btn {
+  text-decoration: none;
+  width: 12rem;
+  margin: auto;
+  letter-spacing: var(--mainSpacing);
+  color: var(--mainYellow);
+  background: var(--Blue);
+  padding: 0.4rem 0.9rem;
+  border: 3px solid var(--mainDark);
+  transition: var(--mainTransition);
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+.primary-btn:hover {
+  background: transparent;
+  color: var(--Blue);
+}
+
+/* form btns*/
+.secondary-btn {
+  width: 18.7rem;
+  height: 2.5rem;
+  background: var(--mainYellow);
+  border-color: var(--mainYellow);
+  outline-width: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 0.3rem;
+  outline: var(--mainYellow);
+  color: var(--Blue);
+  letter-spacing: var(--mainSpacing);
+  outline: none;
+  border-color: var(--mainYellow);
+}
+.secondary-btn:hover {
+  transition: var(--mainTransition);
+  background: var(--secYellow);
+  cursor: pointer;
+}
+
+/*welcome*/
+.welcome {
+  margin-top: 5rem;
+  box-shadow: var(--darkShadow);
+  padding-bottom: 2rem;
+}
+
+/*Dashboard*/
+.stories {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+
+/**profile*/
+.profile-right {
+  min-height: 50vh;
+  padding: 1rem;
+  background-color: var(--profileBg);
+}
+.profile-left {
+  background-color: var(--profileBg);
+  padding: 1rem;
+  max-height: 50vh;
+  max-width: 400px;
+  color: var(--mainDark);
+}
+.login-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  place-items: center;
+}
+.profile-image {
+  width: 120px;
+  height: 130px;
+  border-radius: 80px;
+}
+.profile-image:hover {
+  opacity: 0.8;
+}
+
+.profile-create {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Searchbar*/
+.search {
+  padding: 0.4rem;
+  background-color: floralwhite;
+  color: coral;
+  border-color: var(--Blue);
+}
+.search::placeholder {
+  color: var(--mainBlue);
+}
+
+.table {
+  margin-top: 1rem;
+}
+
+/*Single story page*/
+.story-details {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+}
+.story-details .story {
+  width: 700px;
+  background-color: azure;
+}
+
+.comment-form input[type="submit"],
+textarea {
+  width: 17rem;
+}
+.comment-form textarea {
+  height: 5rem;
+  background-color: azure;
+}
+.comments h6 {
+  background-color: azure;
+  padding: 0.5rem;
+}
+
+.content-page {
+  position: relative;
+}
+.back {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .profile-left {
+    margin-bottom: 1rem;
+    max-width: 500px;
+  }
+  .profile-create .modal {
+    width: 400px;
+  }
+
+  .welcome {
+    max-width: 500px;
+  }
+
+  .stories {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    place-items: center;
+  }
+}
+@media screen and (max-width: 765px) {
+  .stories {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+
+  .story-details {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 855px) {
+  .story-details {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .story-details .details-left {
+    width: 450px;
+    margin-bottom: 0.5rem;
+  }
+}
