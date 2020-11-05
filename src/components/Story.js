@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import moment from "moment";
 import { Card } from "react-bootstrap";
 import { StoryContext } from "../contexts/StoryContext";
 import { AuthContext } from "../contexts/AuthContext";
@@ -10,11 +10,11 @@ export default function Story({ story }) {
   return (
     <Card style={{ width: "20rem" }} key={story._id}>
       <Card.Body>
-        <Card.Title>{story.title}</Card.Title>
+        <Card.Title>{story.title.substring(0, 15)}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           PostedBy: {story.user?.username}
         </Card.Subtitle>
-        <Card.Text> Date: {story.createdAt.substring(0, 10)}</Card.Text>
+        <Card.Text> {moment(story.createdAt).fromNow(true)} ago</Card.Text>
         <hr />
         <Card.Link href={`/stories/${story._id}`}>Read</Card.Link>
         <Card.Link>

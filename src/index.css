@@ -204,17 +204,11 @@ body {
 }
 
 /*Single story page*/
-.story-details {
-  display: flex;
-  justify-content: space-between;
-  width: 1000px;
-}
-.story-details .story {
-  width: 700px;
-  background-color: azure;
+.single-p {
+  background-color: aliceblue;
 }
 
-.comment-form input[type="submit"],
+.comment-form button,
 textarea {
   width: 17rem;
 }
@@ -260,22 +254,5 @@ textarea {
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
-  }
-
-  .story-details {
-    display: flex;
-    flex-direction: column;
-  }
-}
-@media screen and (max-width: 855px) {
-  .story-details {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-  }
-
-  .story-details .details-left {
-    width: 450px;
-    margin-bottom: 0.5rem;
   }
 }

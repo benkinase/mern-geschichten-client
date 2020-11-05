@@ -6,25 +6,19 @@ import { Container, Row, Col } from "react-bootstrap";
 import Title from "../components/Title";
 import CreateStory from "./CreateStory";
 import { StoryContext } from "../contexts/StoryContext";
-import SearchBar from "../components/SearchBar";
 const avatar = "http://www.nretnil.com/avatar/LawrenceEzekielAmos.png";
 
 export default function Profile() {
   const { user, deleteUser, logoutUser } = React.useContext(AuthContext);
-  const {
-    removeStory,
-    myStories,
-    query,
-    searchStory,
-    getPrivateStories,
-    handleClose,
-  } = React.useContext(StoryContext);
+  const { removeStory, myStories, getPrivateStories } = React.useContext(
+    StoryContext
+  );
 
   //console.log(myStories);
   React.useEffect(() => {
-    getPrivateStories(user?._id);
+    getPrivateStories(user._id);
     return () => {};
-  }, [user?._id]);
+  }, [user._id]);
 
   return (
     <Container className="mt-5">

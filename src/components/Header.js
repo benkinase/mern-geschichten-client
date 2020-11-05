@@ -6,8 +6,6 @@ import { StoryContext } from "../contexts/StoryContext";
 import logo from "../logo.svg";
 
 export default function NavbarStories() {
-  const logoutBtn = document.getElementById("logout");
-
   const { logoutUser, user } = useContext(AuthContext);
   const { searchStory, query } = useContext(StoryContext);
 

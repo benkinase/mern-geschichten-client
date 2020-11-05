@@ -153,10 +153,6 @@ const StoryProvider = (props) => {
       )
     : state.stories;
 
-  // handle mModal
-  const [show, setShow] = React.useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
     <StoryContext.Provider
       value={{

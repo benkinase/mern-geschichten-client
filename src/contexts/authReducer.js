@@ -24,7 +24,7 @@ initialState.user = Cookie.getJSON("user") || null;
 // }
 
 export const AuthReducer = (state, action) => {
-  console.log(state, action);
+  //console.log(state, action);
   switch (action.type) {
     case actionTypes.USER_LOGIN_REQUEST:
       return { loading: true };
