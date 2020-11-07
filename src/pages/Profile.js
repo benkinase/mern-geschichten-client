@@ -134,7 +134,9 @@ export default function Profile() {
                                     "success"
                                   );
                                 }
-                                window.location.reload(false);
+                                setTimeout(function () {
+                                  window.location.reload(false);
+                                }, 200);
                               });
                             }}
                           ></i>

@@ -26,9 +26,6 @@ export default function NavbarStories() {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/users" className="text-white"></Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
         <Nav.Link href={user ? "/dashboard" : "/"} className="text-white">
           Dashboard
         </Nav.Link>
@@ -37,21 +34,17 @@ export default function NavbarStories() {
   );
 
   return (
-    <Navbar className="bg-dark" expand="lg">
+    <Navbar className="bg-navbar" expand="lg">
       <Navbar.Brand href={user ? "/dashboard" : "/"}>
         <img src={logo} alt="logo" />
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav " />
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto nav-text">{user ? authLinks : guestLinks}</Nav>
         <Form inline>
           <Nav.Item>
             <Nav.Link href="/" className="mr-2">
-              <Button
-                onClick={logoutUser}
-                variant="outline-warning"
-                id="logout"
-              >
+              <Button onClick={logoutUser} variant="outline-danger" id="logout">
                 {user ? "Logout" : "You are logged out"}
               </Button>
             </Nav.Link>

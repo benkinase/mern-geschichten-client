@@ -14,8 +14,9 @@
   --mainSpacing: 0.3rem;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 3px rgba(0, 0, 0, 0.5);
-  --profileColor: rgb(253, 143, 9);
-  --profileBg: rgb(190, 218, 245);
+  --profileColor: rgb(198, 240, 229);
+  --formBg: rgb(103, 142, 130);
+  --navbar: rgb(98, 194, 188);
 }
 ::selection {
   color: var(--lightRed);
@@ -33,7 +34,7 @@ body {
   min-height: 100vh;
 }
 .navbar {
-  background: var(--Blue);
+  background: var(--navbar);
 }
 .nav-text {
   font-family: "Poppins", sans-serif;
@@ -58,7 +59,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 .bold-text {
-  font-weight: 800;
+  color: floralwhite;
 }
 .light-blue {
   color: var(--lightBlue);
@@ -69,10 +70,10 @@ body {
 .red-text {
   color: var(--lightRed);
 }
-
-.blue-bg {
-  background-color: #593a60;
+.blue-txt {
+  color: var(--lightBlue);
 }
+
 .justify-body {
   text-align: justify;
 }
@@ -87,13 +88,6 @@ body {
 .fas:hover {
   color: var(--mainYellow);
   cursor: pointer;
-}
-.underlined {
-  width: 15rem;
-  height: 0.25rem;
-  background: var(--Blue);
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /*buttons*/
@@ -160,10 +154,10 @@ body {
 .profile-right {
   min-height: 50vh;
   padding: 1rem;
-  background-color: var(--profileBg);
+  background-color: var(--profileColor);
 }
 .profile-left {
-  background-color: var(--profileBg);
+  background-color: var(--profileColor);
   padding: 1rem;
   max-height: 50vh;
   max-width: 400px;
@@ -204,21 +198,28 @@ body {
 }
 
 /*Single story page*/
-.single-p {
+.single-p,
+.comment-form textarea {
   background-color: aliceblue;
 }
 
 .comment-form button,
 textarea {
-  width: 17rem;
+  width: 20rem;
+}
+.comment-form button {
+  background-color: #38778e;
+  color: var(--mainWhite);
 }
 .comment-form textarea {
   height: 5rem;
-  background-color: azure;
 }
 .comments h6 {
-  background-color: azure;
+  background-color: var(--Blue);
+  color: var(--mainWhite);
   padding: 0.5rem;
+  overflow-y: scroll;
+  max-height: 50vh;
 }
 
 .content-page {

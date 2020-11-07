@@ -33,9 +33,9 @@ export default function Story(props) {
   };
 
   return (
-    <div className="container mt-5 ">
+    <div className="container mt-5">
       <div className="row mx-auto">
-        <div className="single-p col-sm-12 col-lg-7 shadow  py-5 px-5">
+        <div className="single-p col-sm-12 col-lg-6 shadow p-5 mb-4">
           <p className="title">
             <strong>Title: </strong>
             {story?.title}
@@ -58,7 +58,9 @@ export default function Story(props) {
                 className="fas fa-thumbs-down mr-3"
                 onClick={() => {
                   unlikeStory(story?._id);
-                  window.location.reload(false);
+                  setTimeout(function () {
+                    window.location.reload(false);
+                  }, 200);
                 }}
               ></i>
             ) : (
@@ -66,31 +68,17 @@ export default function Story(props) {
                 className="fas fa-thumbs-up"
                 onClick={() => {
                   likeStory(story?._id);
-                  window.location.reload(false);
+                  setTimeout(function () {
+                    window.location.reload(false);
+                  }, 200);
                 }}
               ></i>
             )}
             <h4 className="red-text">{story?.likes?.length} likes</h4>
           </div>
         </div>
-        <div className="col-sm-8 col-lg-2 mt-4">
-          {story?.comments?.map((comment) => {
-            return (
-              <>
-                <h4>Comments</h4>0
-                <h6 key={comment._id}>
-                  <span style={{ fontWeight: "500" }}>
-                    {comment?.username} <br />
-                  </span>
-                  {comment?.text}
-                  <i className="fas fa-thrash-alt"></i>
-                </h6>
-              </>
-            );
-          })}
-        </div>
 
-        <div className="comment-form">
+        <div className="comment-form col-sm-12 col-lg-5">
           <form onSubmit={handleSubmit}>
             <textarea
               maxlength="213"
@@ -102,6 +90,23 @@ export default function Story(props) {
             <br />
             <button>{"Post comment"}</button>
           </form>
+        </div>
+        <div className="col-sm-12 mt-3  ">
+          {story?.comments?.map((comment) => {
+            return (
+              <div className="comments">
+                <h4>Comments</h4>
+                <h6 key={comment._id} className=" p-2 w-50 mb-3">
+                  <span>
+                    <span className="blue-txt">user:</span> {comment?.username}{" "}
+                    <br />
+                  </span>
+                  <span className="blue-txt">comment:</span> {comment?.text}
+                  <i className="fas fa-thrash-alt"></i>
+                </h6>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

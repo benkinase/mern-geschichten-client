@@ -23,7 +23,9 @@ export default function Story({ story }) {
               className="fas fa-heart text-danger mr-2"
               onClick={() => {
                 unlikeStory(story?._id);
-                window.location.reload(false);
+                setTimeout(() => {
+                  window.location.reload(false);
+                }, 100);
               }}
             ></i>
           ) : (
@@ -31,7 +33,9 @@ export default function Story({ story }) {
               className="fas fa-heart"
               onClick={() => {
                 likeStory(story?._id);
-                window.location.reload(false);
+                setTimeout(function () {
+                  window.location.reload(false);
+                }, 100);
               }}
             ></i>
           )}

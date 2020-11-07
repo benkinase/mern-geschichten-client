@@ -78,6 +78,9 @@ export default function EditStory(props) {
         timer: 3000,
       });
       history.push("/profile");
+      setTimeout(function () {
+        window.location.reload(false);
+      }, 2000);
     } catch (err) {
       setError(err.msg);
     }

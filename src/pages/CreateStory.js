@@ -40,7 +40,7 @@ export default function CreateStory() {
       content: story.content,
       status: story.status,
     };
-    console.log(story);
+    //console.log(story);
 
     try {
       if (!newStory) return;
@@ -52,7 +52,10 @@ export default function CreateStory() {
         showConfirmButton: false,
         timer: 3000,
       });
-      window.location.reload();
+      handleClose();
+      setTimeout(function () {
+        window.location.reload(false);
+      }, 2000);
     } catch (err) {
       setEr(err);
     }
