@@ -4,7 +4,7 @@ import UsersList from "./UsersList";
 
 export default function Dashboard() {
   return (
-    <div className="">
+    <div className="dashboard">
       <Stories />
       <UsersList />
     </div>

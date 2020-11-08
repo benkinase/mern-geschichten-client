@@ -1,5 +1,6 @@
 import React, { useContext, Fragment } from "react";
 import { useLocation } from "react-router-dom";
+import $ from "jquery";
 import Navbar from "react-bootstrap/Navbar";
 import { Nav, Form, Button } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
@@ -7,10 +8,15 @@ import { StoryContext } from "../contexts/StoryContext";
 import logo from "../logo.svg";
 
 export default function NavbarStories() {
+  let location = useLocation();
   const { logoutUser, user } = useContext(AuthContext);
   const { searchStory, query } = useContext(StoryContext);
 
-  let location = useLocation();
+  $(document).ready(function () {
+    if (location.pathname === "/signup") {
+      $("#logout").html("Click to login");
+    }
+  });
 
   const guestLinks = (
     <Fragment>
@@ -47,7 +53,7 @@ export default function NavbarStories() {
         <Form inline>
           <Nav.Item>
             <Nav.Link href="/" className="mr-2">
-              <Button onClick={logoutUser} variant="outline-danger" id="logout">
+              <Button onClick={logoutUser} variant="outline-dark" id="logout">
                 {user ? "Logout" : "You are logged out"}
               </Button>
             </Nav.Link>

@@ -147,7 +147,7 @@ const StoryProvider = (props) => {
     setQuery(currentTarget.value);
   }
 
-  const newStories = query
+  const filteredStories = query
     ? state.stories?.filter((story) =>
         story.title.toLowerCase().includes(query.toLowerCase())
       )
@@ -156,8 +156,8 @@ const StoryProvider = (props) => {
   return (
     <StoryContext.Provider
       value={{
-        stories: newStories,
-        myStories: state.userStories,
+        stories: filteredStories,
+        privateStories: state.userStories,
         story: state.story,
         loading: state.loading,
         message: state.message,

@@ -2,12 +2,13 @@ import React from "react";
 import { StoryContext } from "../contexts/StoryContext";
 import Story from "./Story";
 import Spinner from "./Spinner";
+import { Container } from "react-bootstrap";
 
 export default function Stories() {
   const { stories, loading } = React.useContext(StoryContext);
 
   return (
-    <div className="container">
+    <Container>
       {loading ? (
         <Spinner />
       ) : (
@@ -17,6 +18,6 @@ export default function Stories() {
           ))}
         </div>
       )}
-    </div>
+    </Container>
   );
 }

@@ -4,19 +4,19 @@
   --mainBlue: #170f8b;
   --Blue: #03042e;
   --lightBlue: #0fa3f8;
-  --mainWhite: #f5f5ee;
-  --secondWhite: floralwhite;
+  --mainWhite: white;
+  --editWhite: #f3eaea;
   --mainDark: #232528;
   --mainYellow: #ffae00;
   --secYellow: #f7bb39;
-  --lightRed: rgb(243, 21, 139);
+  --lightRed: #f10e8f;
   --mainTransition: all 0.3s linear;
   --mainSpacing: 0.3rem;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 3px rgba(0, 0, 0, 0.5);
-  --profileBg: rgb(232, 243, 240);
-  --formBg: rgb(103, 142, 130);
-  --navbar: rgb(98, 194, 188);
+  --profileBg: #c0d5d0;
+  --formBg: #678e82;
+  --navbar: #55a49e;
 }
 ::selection {
   color: var(--lightRed);
@@ -30,8 +30,8 @@ body {
     sans-serif;
 }
 .app {
-  background-color: var(--secondWhite);
-  min-height: 100vh;
+  height: 100vh;
+  background-color: var(--mainWhite);
 }
 .navbar {
   background: var(--navbar);
@@ -143,6 +143,12 @@ body {
 }
 
 /*Dashboard*/
+.story {
+  background-color: #e8f7f6 !important;
+  border: none !important;
+  width: 20rem;
+}
+
 .stories {
   margin-top: 2rem;
   display: grid;
@@ -152,6 +158,9 @@ body {
 }
 
 /**profile*/
+.profile-page {
+  background-color: white;
+}
 .profile-right {
   min-height: 50vh;
   padding: 1rem;
@@ -202,7 +211,7 @@ body {
 /*Single story page*/
 .single-p,
 .comment-form textarea {
-  background-color: aliceblue;
+  background-color: #daebec;
 }
 
 .comment-form button,
@@ -217,11 +226,9 @@ textarea {
   height: 5rem;
 }
 .comments h6 {
-  background-color: var(--Blue);
+  background-color: var(--lightRed);
   color: var(--mainWhite);
   padding: 0.5rem;
-  overflow-y: scroll;
-  max-height: 50vh;
 }
 
 .content-page {

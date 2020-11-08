@@ -154,6 +154,6 @@ const EditContainer = styled.div`
     padding: 30px;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    background: white;
+    background: var(--editWhite);
   }
 `;

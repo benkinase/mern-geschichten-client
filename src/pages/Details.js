@@ -1,12 +1,10 @@
 import React from "react";
 import moment from "moment";
-import { Row, Col } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import $ from "jquery";
 import { StoryContext } from "../contexts/StoryContext";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Story(props) {
-  let history = useHistory();
   const {
     likeStory,
     getStory,
@@ -17,20 +15,29 @@ export default function Story(props) {
   const { user } = React.useContext(AuthContext);
   const [value, setValue] = React.useState({ text: "" });
 
-  //console.log(user._id, storyId);
-  //const [story, setStory] = React.useState({});
-
+  // get single story
   React.useEffect(() => {
     getStory(props.match.params.id);
     return () => {};
   }, [props.match.params.id]);
 
+  // post comment handler
   const handleSubmit = (e) => {
     e.preventDefault();
     makeComment(story._id, { text: value });
     window.location.reload(false);
     setValue({ text: "" });
   };
+
+  // comment word count
+  $(document).ready(function () {
+    $("*[data-max]").keyup(function () {
+      let text_max = $(this).data("max");
+      let text_length = $(this).val().length;
+      let text_remaining = text_max - text_length;
+      $(".char-max-alert").html(`${text_length}/${text_remaining}`);
+    });
+  });
 
   return (
     <div className="container mt-5">
@@ -43,7 +50,6 @@ export default function Story(props) {
           <p className="justify-body">
             <strong>Content: </strong> {story?.content}
           </p>
-
           <p className="date">
             <strong>Date: </strong>
             {moment(story?.createdAt).fromNow(true)} ago
@@ -81,7 +87,8 @@ export default function Story(props) {
         <div className="comment-form col-sm-12 col-lg-5">
           <form onSubmit={handleSubmit}>
             <textarea
-              maxlength="213"
+              maxLength="100"
+              data-max="100"
               type="text"
               placeholder="Comment..."
               onChange={(e) => setValue(e.target?.value)}
@@ -89,9 +96,10 @@ export default function Story(props) {
             ></textarea>
             <br />
             <button>{"Post comment"}</button>
+            <p className="char-max-alert red-text"></p>
           </form>
         </div>
-        <div className="col-sm-12 mt-3  ">
+        <div className="col-sm-12 mt-3">
           {story?.comments?.map((comment) => {
             return (
               <div className="comments">

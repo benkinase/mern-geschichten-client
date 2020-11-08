@@ -11,19 +11,19 @@ const avatar = "http://www.nretnil.com/avatar/LawrenceEzekielAmos.png";
 
 export default function Profile() {
   const { user, deleteUser, logoutUser } = React.useContext(AuthContext);
-  const { removeStory, myStories, getPrivateStories } = React.useContext(
+  const { removeStory, privateStories, getPrivateStories } = React.useContext(
     StoryContext
   );
 
-  //console.log(myStories);
+  //console.log(privateStories);
   React.useEffect(() => {
     getPrivateStories(user._id);
     return () => {};
   }, [user._id]);
 
   return (
-    <Container className="mt-5">
-      <Title name="Dashboard" title={user?.username} />
+    <Container className="mt-5 profile-page">
+      <Title name="Dashboard" title={user?.username} className="title" />
       <div className="mt-2 profile ">
         <Row>
           <Col>
@@ -42,7 +42,6 @@ export default function Profile() {
                   <p>Joined: {user?.date.substring(0, 10)}</p>
                 </div>
               </div>
-
               <button
                 className="btn btn-danger mt-5"
                 onClick={() => {
@@ -51,8 +50,8 @@ export default function Profile() {
                     text: "You won't be able to revert this!",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
+                    confirmButtonColor: "#38778e",
+                    cancelButtonColor: "#f10e8f",
                     confirmButtonText: "Yes, delete it!",
                   }).then((result) => {
                     if (result.isConfirmed) {
@@ -60,7 +59,7 @@ export default function Profile() {
                       logoutUser();
                       Swal.fire(
                         "Deleted!",
-                        "Your file has been deleted.",
+                        "Your account has been deleted.",
                         "success"
                       );
                     }
@@ -72,22 +71,22 @@ export default function Profile() {
             </div>
           </Col>
           <Col>
-            <div className=" profile-right shadow">
+            <div className=" profile-right shadow mb-5 ">
               <div className="profile-create">
                 <button className=" btn btn-warning h-25 mt-1  ">
                   <CreateStory className="modal" />
                 </button>
 
                 <span className="profile-search">
-                  <div className="btn btn-outline-warning">
+                  <div className="btn btn-outline-secondary">
                     Soon...more search
                   </div>
                 </span>
               </div>
-              {myStories?.length === 0 ? (
+              {privateStories?.length === 0 ? (
                 <p>You have no stories!</p>
               ) : (
-                <table className="table ">
+                <table className="table">
                   <thead>
                     <tr>
                       <th>Title</th>
@@ -97,7 +96,7 @@ export default function Profile() {
                     </tr>
                   </thead>
                   <tbody>
-                    {myStories?.map((story) => (
+                    {privateStories?.map((story) => (
                       <tr key={story._id}>
                         <td>
                           <Link
@@ -123,8 +122,8 @@ export default function Profile() {
                                 text: "You won't be able to revert this!",
                                 icon: "warning",
                                 showCancelButton: true,
-                                confirmButtonColor: "#3085d6",
-                                cancelButtonColor: "#d33",
+                                confirmButtonColor: "#38778e",
+                                cancelButtonColor: "#f10e8f",
                                 confirmButtonText: "Yes, delete it!",
                               }).then((result) => {
                                 if (result.isConfirmed) {

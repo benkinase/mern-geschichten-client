@@ -8,14 +8,14 @@ export default function Story({ story }) {
   const { user } = React.useContext(AuthContext);
   const { likeStory, unlikeStory } = React.useContext(StoryContext);
   return (
-    <Card style={{ width: "20rem" }} key={story._id}>
+    <Card className="story" key={story._id}>
       <Card.Body>
         <Card.Title>{story.title.substring(0, 15)}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           PostedBy: {story.user?.username}
         </Card.Subtitle>
         <Card.Text> {moment(story.createdAt).fromNow()}</Card.Text>
-        <hr />
+        <hr className="blue-text" />
         <Card.Link href={`/stories/${story._id}`}>Read</Card.Link>
         <Card.Link>
           {story?.likes?.includes(user?._id) ? (
