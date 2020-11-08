@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -79,7 +80,7 @@ export default function Profile() {
 
                 <span className="profile-search">
                   <div className="btn btn-outline-warning">
-                    Search here..soon
+                    Soon...more search
                   </div>
                 </span>
               </div>
@@ -107,7 +108,7 @@ export default function Profile() {
                           </Link>
                         </td>
                         <td>{story.status}</td>
-                        <td>{story.createdAt.substring(0, 10)}</td>
+                        <td>{moment(story.createdAt).fromNow()}</td>
                         <td>
                           <Link to={`/story/edit/${story._id}`}>
                             <i className="fas fa-pen mr-3"></i>

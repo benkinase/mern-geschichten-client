@@ -14,7 +14,7 @@
   --mainSpacing: 0.3rem;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 3px rgba(0, 0, 0, 0.5);
-  --profileColor: rgb(198, 240, 229);
+  --profileBg: rgb(232, 243, 240);
   --formBg: rgb(103, 142, 130);
   --navbar: rgb(98, 194, 188);
 }
@@ -59,7 +59,8 @@ body {
   font-family: "Poppins", sans-serif;
 }
 .bold-text {
-  color: floralwhite;
+  color: var(--Blue);
+  font-weight: 500;
 }
 .light-blue {
   color: var(--lightBlue);
@@ -154,15 +155,16 @@ body {
 .profile-right {
   min-height: 50vh;
   padding: 1rem;
-  background-color: var(--profileColor);
+  background-color: var(--profileBg);
 }
 .profile-left {
-  background-color: var(--profileColor);
+  background-color: var(--profileBg);
   padding: 1rem;
   max-height: 50vh;
   max-width: 400px;
   color: var(--mainDark);
 }
+
 .login-details {
   display: grid;
   grid-template-columns: 1fr 2fr;

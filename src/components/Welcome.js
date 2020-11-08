@@ -6,7 +6,7 @@ export default function Welcome() {
     <div className="welcome container">
       <div className="col-10 mx-auto text-title text-center">
         <div>
-          <h3 className="bold-text">Welcome back to die Geschichten!</h3>
+          <h3 className="bold-text">Welcome back to Geschichten!</h3>
           <div className="mt-2">
             <p>Please log in to share your stories!</p>
             <p>& Enjoy your time on here</p>

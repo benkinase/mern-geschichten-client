@@ -88,7 +88,7 @@ export default function EditStory(props) {
 
   return (
     <EditContainer>
-      <Form className="container">
+      <Form className="container form">
         <span className="text-danger">{error}</span>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Status</Form.Label>
@@ -125,6 +125,7 @@ export default function EditStory(props) {
             onChange={handleChange}
             type="text"
             name="content"
+            maxLength="250"
             required
           />
         </Form.Group>
@@ -146,9 +147,9 @@ export default function EditStory(props) {
   );
 }
 const EditContainer = styled.div`
-  form {
+  .form {
     width: 400px;
-    min-height: 50vh;
+    min-height: 55vh;
     margin: 4rem auto;
     padding: 30px;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);

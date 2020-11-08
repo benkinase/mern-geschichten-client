@@ -113,6 +113,7 @@ export default function CreateStory() {
                 name="content"
                 required
                 max="50"
+                maxlength="250"
               />
             </Form.Group>
           </Form>

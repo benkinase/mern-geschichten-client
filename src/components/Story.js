@@ -14,7 +14,7 @@ export default function Story({ story }) {
         <Card.Subtitle className="mb-2 text-muted">
           PostedBy: {story.user?.username}
         </Card.Subtitle>
-        <Card.Text> {moment(story.createdAt).fromNow(true)} ago</Card.Text>
+        <Card.Text> {moment(story.createdAt).fromNow()}</Card.Text>
         <hr />
         <Card.Link href={`/stories/${story._id}`}>Read</Card.Link>
         <Card.Link>

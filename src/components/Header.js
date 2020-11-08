@@ -1,4 +1,5 @@
 import React, { useContext, Fragment } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import { Nav, Form, Button } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
@@ -8,6 +9,8 @@ import logo from "../logo.svg";
 export default function NavbarStories() {
   const { logoutUser, user } = useContext(AuthContext);
   const { searchStory, query } = useContext(StoryContext);
+
+  let location = useLocation();
 
   const guestLinks = (
     <Fragment>
@@ -22,12 +25,12 @@ export default function NavbarStories() {
     <Fragment>
       <Nav.Item>
         <Nav.Link href="/profile" className="text-white">
-          {user?.username}
+          {location.pathname !== "/profile" ? user?.username : null}
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link href={user ? "/dashboard" : "/"} className="text-white">
-          Dashboard
+          {location.pathname !== "/dashboard" ? "Dashboard" : null}
         </Nav.Link>
       </Nav.Item>
     </Fragment>
