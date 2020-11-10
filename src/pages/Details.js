@@ -109,7 +109,9 @@ export default function Story(props) {
           </div>
           <div className="row mx-auto">
             <div className="col-sm-12 col-md-6 mt-3 comments p-2">
-              <h5>Comments</h5>
+              <h5>
+                {story?.comments?.length > 0 ? "Comments" : "No comment yet"}
+              </h5>
               {story?.comments?.map((comment) => {
                 return (
                   <div className="comment">

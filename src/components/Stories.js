@@ -1,9 +1,9 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import styled from "styled-components/macro";
 import { StoryContext } from "../contexts/StoryContext";
 import Story from "./Story";
 import Spinner from "./Spinner";
-import { Container } from "react-bootstrap";
 
 export default function Stories() {
   const { stories, loading } = React.useContext(StoryContext);
@@ -12,7 +12,7 @@ export default function Stories() {
     <Container>
       <StoriesContainer>
         {loading ? (
-          <Spinner title="Stories loading" />
+          <Spinner title="Stories loading..." />
         ) : (
           <div className="stories">
             {stories?.map((story) => (
