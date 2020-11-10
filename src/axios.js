@@ -15,8 +15,6 @@ function AuthHeader() {
 const instance = axios.create({
   baseURL: process.env.REACT_APP_BACKEN_URL,
   headers: AuthHeader(),
-  //Accept: "Application/json",
-  //"Content-Type": "Application/json",
 });
 
 // intercepting invalid token

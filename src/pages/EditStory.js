@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import $ from "jquery";
 import axios from "../axios";
 import styled from "styled-components/macro";
 import { Button, Form } from "react-bootstrap";
@@ -86,6 +87,15 @@ export default function EditStory(props) {
     }
   }
 
+  $(document).ready(function () {
+    $("*[data-max]").keyup(function () {
+      let text_max = $(this).data("max");
+      let text_length = $(this).val().length;
+      let text_remaining = text_max - text_length;
+      $(".char-max-alert").html(`${text_length}/${text_remaining}`);
+    });
+  });
+
   return (
     <EditContainer>
       <Form className="container form">
@@ -119,6 +129,7 @@ export default function EditStory(props) {
         </Form.Group>
         <Form.Group controlId="content" bssize="large">
           <Form.Label>Content</Form.Label>
+          <span className="char-max-alert red-text ml-2"></span>
           <Form.Control
             as="textarea"
             value={currentStory.content}
@@ -126,10 +137,11 @@ export default function EditStory(props) {
             type="text"
             name="content"
             maxLength="250"
+            data-max="250"
             required
           />
         </Form.Group>
-        <p className="float-right mt-2">
+        <p className="float-right mt-1 mb-2">
           <Button
             variant="secondary"
             type="button"
@@ -149,7 +161,7 @@ export default function EditStory(props) {
 const EditContainer = styled.div`
   .form {
     width: 400px;
-    min-height: 55vh;
+    min-height: 52vh;
     margin: 4rem auto;
     padding: 30px;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);

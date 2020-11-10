@@ -3,10 +3,10 @@ import React from "react";
 export default function SearchBar({ searching, query }) {
   return (
     <div>
-      <input
+      <Search
         autoFocus
         type="text"
-        className="search"
+        className="search text-popins"
         placeholder="Search by title"
         value={query}
         onChange={searching}
@@ -14,3 +14,16 @@ export default function SearchBar({ searching, query }) {
     </div>
   );
 }
+
+let Search = styled.input`
+  /* Searchbar*/
+  .search {
+    padding: 0.4rem;
+    background-color: #dfdcd6;
+    color: coral;
+    border-color: var(--Blue);
+  }
+  .search::placeholder {
+    color: var(--mainBlue);
+  }
+`;

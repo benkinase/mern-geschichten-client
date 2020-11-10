@@ -8,7 +8,6 @@ export const initialState = {
   loading: false,
   error: "",
   users: [],
-  profile: {},
   message: "",
 };
 
@@ -24,12 +23,13 @@ initialState.user = Cookie.getJSON("user") || null;
 // }
 
 export const AuthReducer = (state, action) => {
-  //console.log(state, action);
+  console.log(state, action);
   switch (action.type) {
     case actionTypes.USER_LOGIN_REQUEST:
       return { loading: true };
     case actionTypes.USER_LOGIN_SUCCESS:
       return {
+        ...state,
         user: action.payload,
         token: action.payload.token,
         loading: false,
@@ -40,24 +40,38 @@ export const AuthReducer = (state, action) => {
     case actionTypes.USER_REGISTER_REQUEST:
       return { loading: true };
     case actionTypes.USER_REGISTER_SUCCESS:
-      //localStorage.removeItem("token");
       return {
         loading: false,
         message: action.payload.message,
-        //alert: action.payload.message,
       };
     case actionTypes.USER_REGISTER_FAIL:
       return { loading: false, error: action.payload };
 
     case actionTypes.USER_LOGOUT:
-      //localStorage.removeItem("token");
       return { ...state, isLoggedIn: false, user: null };
 
     case actionTypes.USER_PROFILE_REQUEST:
       return { loading: true };
     case actionTypes.USER_PROFILE_SUCCESS:
-      return { loading: false, profile: action.payload };
+      return {
+        ...state,
+        profile: action.payload,
+        loading: false,
+        message: action.payload.message,
+      };
     case actionTypes.USER_PROFILE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case actionTypes.USER_PROFILE_UPDATE_REQUEST:
+      return { loading: true };
+    case actionTypes.USER_PROFILE_UPDATE_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        loading: false,
+        //message: action.payload.message,
+      };
+    case actionTypes.USER_PROFILE_UPDATE_FAIL:
       return { loading: false, error: action.payload };
 
     case actionTypes.USER_PROFILE_DELETE_REQUEST:

@@ -10,7 +10,7 @@ export const initialState = {
 };
 
 export const storyReducer = (state, action) => {
-  //console.log(action.payload);
+  // console.log(action.payload);
   switch (action.type) {
     case actionTypes.STORY_LIST_REQUEST:
       return { loading: true };

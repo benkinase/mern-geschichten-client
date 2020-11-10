@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NotFound(props) {
-  console.log(props, "from notfound");
+  //console.log(props, "from notfound");
   return (
-    <div className="h-100 bg-light container">
+    <div className="h-50 bg-light container">
       <div className="container mt-5 py-5 ">
         <div className="row">
           <div className=" col-10 mx-auto text-title text-center">
@@ -14,6 +15,9 @@ function NotFound(props) {
               <span className="text-danger">{props.location.pathname} </span>
               was not found
             </h3>
+            <Link to={"/"} className="btn btn-outline-info mt-4">
+              back home
+            </Link>
           </div>
         </div>
       </div>

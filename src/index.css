@@ -5,7 +5,7 @@
   --Blue: #03042e;
   --lightBlue: #0fa3f8;
   --mainWhite: white;
-  --editWhite: #f3eaea;
+  --editWhite: #dfebf0;
   --mainDark: #232528;
   --mainYellow: #ffae00;
   --secYellow: #f7bb39;
@@ -41,9 +41,10 @@ body {
   letter-spacing: 0.3rem;
   text-transform: uppercase;
   font-weight: 800;
+  color: var(--mainYellow) !important;
 }
 
-/*Global*/
+/*Globals*/
 .text-title {
   font-family: "Poppins", sans-serif;
   letter-spacing: var(--mainSpacing);
@@ -53,10 +54,10 @@ body {
   color: var(--mainBlue);
 }
 .white-bg {
-  background-color: floralwhite;
+  background-color: #dcdad1;
 }
 .text-popins {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
 }
 .bold-text {
   color: var(--Blue);
@@ -91,28 +92,6 @@ body {
   cursor: pointer;
 }
 
-/*buttons*/
-/* home page*/
-.primary-btn {
-  text-decoration: none;
-  width: 12rem;
-  margin: auto;
-  letter-spacing: var(--mainSpacing);
-  color: var(--mainYellow);
-  background: var(--Blue);
-  padding: 0.4rem 0.9rem;
-  border: 3px solid var(--mainDark);
-  transition: var(--mainTransition);
-  text-transform: uppercase;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-}
-.primary-btn:hover {
-  background: transparent;
-  color: var(--Blue);
-}
-
 /* form btns*/
 .secondary-btn {
   width: 18.7rem;
@@ -133,136 +112,4 @@ body {
   transition: var(--mainTransition);
   background: var(--secYellow);
   cursor: pointer;
-}
-
-/*welcome*/
-.welcome {
-  margin-top: 5rem;
-  box-shadow: var(--darkShadow);
-  padding-bottom: 2rem;
-}
-
-/*Dashboard*/
-.story {
-  background-color: #e8f7f6 !important;
-  border: none !important;
-  width: 20rem;
-}
-
-.stories {
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-}
-
-/**profile*/
-.profile-page {
-  background-color: white;
-}
-.profile-right {
-  min-height: 50vh;
-  padding: 1rem;
-  background-color: var(--profileBg);
-}
-.profile-left {
-  background-color: var(--profileBg);
-  padding: 1rem;
-  max-height: 50vh;
-  max-width: 400px;
-  color: var(--mainDark);
-}
-
-.login-details {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  place-items: center;
-}
-.profile-image {
-  width: 120px;
-  height: 130px;
-  border-radius: 80px;
-}
-.profile-image:hover {
-  opacity: 0.8;
-}
-
-.profile-create {
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Searchbar*/
-.search {
-  padding: 0.4rem;
-  background-color: floralwhite;
-  color: coral;
-  border-color: var(--Blue);
-}
-.search::placeholder {
-  color: var(--mainBlue);
-}
-
-.table {
-  margin-top: 1rem;
-}
-
-/*Single story page*/
-.single-p,
-.comment-form textarea {
-  background-color: #daebec;
-}
-
-.comment-form button,
-textarea {
-  width: 20rem;
-}
-.comment-form button {
-  background-color: #38778e;
-  color: var(--mainWhite);
-}
-.comment-form textarea {
-  height: 5rem;
-}
-.comments h6 {
-  background-color: var(--lightRed);
-  color: var(--mainWhite);
-  padding: 0.5rem;
-}
-
-.content-page {
-  position: relative;
-}
-.back {
-  position: absolute;
-  top: 0rem;
-  right: 0rem;
-}
-
-@media screen and (max-width: 1000px) {
-  .profile-left {
-    margin-bottom: 1rem;
-    max-width: 500px;
-  }
-  .profile-create .modal {
-    width: 400px;
-  }
-
-  .welcome {
-    max-width: 500px;
-  }
-
-  .stories {
-    display: grid;
-    grid-template-columns: repeat(2, 2fr);
-    place-items: center;
-  }
-}
-@media screen and (max-width: 765px) {
-  .stories {
-    display: grid;
-    grid-template-columns: 1fr;
-    place-items: center;
-  }
 }

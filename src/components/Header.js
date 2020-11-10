@@ -13,17 +13,18 @@ export default function NavbarStories() {
   const { searchStory, query } = useContext(StoryContext);
 
   $(document).ready(function () {
-    if (location.pathname === "/signup") {
+    if (!user && location.pathname === "/signup") {
       $("#logout").html("Click to login");
+    }
+    if (!user && location.pathname === "/login") {
+      $("#logout").html("Click to signup");
     }
   });
 
   const guestLinks = (
     <Fragment>
       <Nav.Item>
-        <Nav.Link href="/signup" className="text-white">
-          Signup
-        </Nav.Link>
+        <Nav.Link href="/signup" className="text-white"></Nav.Link>
       </Nav.Item>
     </Fragment>
   );
@@ -52,7 +53,7 @@ export default function NavbarStories() {
         <Nav className="ml-auto nav-text">{user ? authLinks : guestLinks}</Nav>
         <Form inline>
           <Nav.Item>
-            <Nav.Link href="/" className="mr-2">
+            <Nav.Link href="/" className="ml-n3">
               <Button onClick={logoutUser} variant="outline-dark" id="logout">
                 {user ? "Logout" : "You are logged out"}
               </Button>

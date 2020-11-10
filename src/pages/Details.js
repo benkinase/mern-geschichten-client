@@ -1,14 +1,17 @@
 import React from "react";
 import moment from "moment";
+import styled from "styled-components";
 import $ from "jquery";
 import { StoryContext } from "../contexts/StoryContext";
 import { AuthContext } from "../contexts/AuthContext";
+import Spinner from "../components/Spinner";
 
 export default function Story(props) {
   const {
     likeStory,
     getStory,
     story,
+    loading,
     unlikeStory,
     makeComment,
   } = React.useContext(StoryContext);
@@ -40,83 +43,128 @@ export default function Story(props) {
   });
 
   return (
-    <div className="container mt-5">
-      <div className="row mx-auto">
-        <div className="single-p col-sm-12 col-lg-6 shadow p-5 mb-4">
-          <p className="title">
-            <strong>Title: </strong>
-            {story?.title}
-          </p>
-          <p className="justify-body">
-            <strong>Content: </strong> {story?.content}
-          </p>
-          <p className="date">
-            <strong>Date: </strong>
-            {moment(story?.createdAt).fromNow(true)} ago
-          </p>
-          <p className="date">
-            <strong>Story from: </strong>
-            {story?.user?.username}
-          </p>
-          <div className="likes">
-            {story?.likes?.includes(user?._id) ? (
-              <i
-                className="fas fa-thumbs-down mr-3"
-                onClick={() => {
-                  unlikeStory(story?._id);
-                  setTimeout(function () {
-                    window.location.reload(false);
-                  }, 200);
-                }}
-              ></i>
-            ) : (
-              <i
-                className="fas fa-thumbs-up"
-                onClick={() => {
-                  likeStory(story?._id);
-                  setTimeout(function () {
-                    window.location.reload(false);
-                  }, 200);
-                }}
-              ></i>
-            )}
-            <h4 className="red-text">{story?.likes?.length} likes</h4>
-          </div>
-        </div>
-
-        <div className="comment-form col-sm-12 col-lg-5">
-          <form onSubmit={handleSubmit}>
-            <textarea
-              maxLength="100"
-              data-max="100"
-              type="text"
-              placeholder="Comment..."
-              onChange={(e) => setValue(e.target?.value)}
-              required
-            ></textarea>
-            <br />
-            <button>{"Post comment"}</button>
-            <p className="char-max-alert red-text"></p>
-          </form>
-        </div>
-        <div className="col-sm-12 mt-3">
-          {story?.comments?.map((comment) => {
-            return (
-              <div className="comments">
-                <h4>Comments</h4>
-                <h6 key={comment._id} className=" p-2 w-50 mb-3">
-                  <span>
-                    <span className="blue-txt">user:</span> {comment?.username}{" "}
-                    <br />
-                  </span>
-                  <span className="blue-txt">comment:</span> {comment?.text}
-                  <i className="fas fa-thrash-alt"></i>
-                </h6>
+    <SingleStory className="container mt-5">
+      {loading ? (
+        <Spinner title=" Page loading" />
+      ) : (
+        <>
+          <div className="row mx-auto ">
+            <div className="single-p col-sm-12 col-md-6 shadow p-4 mb-4">
+              <p className="title">
+                <strong>Title: </strong>
+                {story?.title}
+              </p>
+              <p className="justify-body">
+                <strong>Content: </strong> {story?.content}
+              </p>
+              <p className="date">
+                <strong>Date: </strong>
+                {moment(story?.createdAt).fromNow(true)} ago
+              </p>
+              <p className="date">
+                <strong>Story from: </strong>
+                {story?.user?.username}
+              </p>
+              <div className="likes">
+                {story?.likes?.includes(user?._id) ? (
+                  <i
+                    className="fas fa-thumbs-down mr-3"
+                    onClick={() => {
+                      unlikeStory(story?._id);
+                      setTimeout(function () {
+                        window.location.reload(false);
+                      }, 200);
+                    }}
+                  ></i>
+                ) : (
+                  <i
+                    className="fas fa-thumbs-up"
+                    onClick={() => {
+                      likeStory(story?._id);
+                      setTimeout(function () {
+                        window.location.reload(false);
+                      }, 200);
+                    }}
+                  ></i>
+                )}
+                <h4 className="red-text">{story?.likes?.length} likes</h4>
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+            </div>
+
+            <div className="comment-form col-sm-12 col-md-5 offset-md-1">
+              <form onSubmit={handleSubmit} className="">
+                <textarea
+                  maxLength="100"
+                  data-max="100"
+                  type="text"
+                  placeholder="Comment..."
+                  onChange={(e) => setValue(e.target?.value)}
+                  required
+                ></textarea>
+                <br />
+                <button>{"Post comment"}</button>
+                <p className="char-max-alert red-text"></p>
+              </form>
+            </div>
+          </div>
+          <div className="row mx-auto">
+            <div className="col-sm-12 col-md-6 mt-3 comments p-2">
+              <h5>Comments</h5>
+              {story?.comments?.map((comment) => {
+                return (
+                  <div className="comment">
+                    <p key={comment._id} className="">
+                      <span>{comment?.username} = </span>
+                      {comment?.text}
+                      <i className="fas fa-thrash-alt"></i>
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
+    </SingleStory>
   );
 }
+
+const SingleStory = styled.div`
+  .single-p {
+    background-color: #b6ccce;
+  }
+
+  .comment-form textarea {
+    background-color: #eff5f5;
+    color: purple;
+  }
+
+  .comment-form button,
+  textarea {
+    width: 100%;
+  }
+  .comment-form button {
+    background-color: #38778e;
+    color: var(--mainWhite);
+  }
+
+  .comment-form button:hover {
+    background-color: #488e93;
+    color: var(--mainYellow);
+    transition: var(--mainTransition);
+  }
+  .comment-form textarea {
+    height: 5rem;
+    padding: 0.3rem;
+  }
+
+  .comments {
+    background-color: #bdd0d1;
+  }
+  .comments p {
+    background-color: var(--mainWhite);
+    padding: 0.5rem;
+    min-height: 5vh;
+    overflow-y: scroll;
+  }
+`;

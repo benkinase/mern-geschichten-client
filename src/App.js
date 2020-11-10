@@ -24,7 +24,7 @@ function App() {
           <AuthRoute exact path="/stories/:id" component={StoryContent} />
           <AuthRoute exact path="/story/edit/:id" component={Editing} />
           <AuthRoute exact path="/profile" component={Profile} />
-          <Route component={Notfound} />
+          <Route exact path="**" component={Notfound} />
         </Switch>
       </Router>
     </div>

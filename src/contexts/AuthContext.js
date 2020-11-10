@@ -42,19 +42,19 @@ function AuthContextProvider(props) {
     }
   }
 
-  // get user
-  async function getUser(id) {
-    dispatch({ type: actionTypes.USER_PROFILE_REQUEST, payload: id });
-    try {
-      const { data } = await axios.get("/api/user/profile/" + id);
-      dispatch({ type: actionTypes.USER_PROFILE_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({
-        type: actionTypes.USER_PROFILE_FAIL,
-        payload: error.response.data.message,
-      });
-    }
-  }
+  // // get user
+  // async function getUser(id) {
+  //   dispatch({ type: actionTypes.USER_PROFILE_REQUEST, payload: id });
+  //   try {
+  //     const { data } = await axios.get("/api/user/profile/" + id);
+  //     dispatch({ type: actionTypes.USER_PROFILE_SUCCESS, payload: data });
+  //   } catch (error) {
+  //     dispatch({
+  //       type: actionTypes.USER_PROFILE_FAIL,
+  //       payload: error.response.data.message,
+  //     });
+  //   }
+  // }
 
   // remove user
   async function deleteUser(id) {
@@ -72,19 +72,37 @@ function AuthContextProvider(props) {
       });
     }
   }
-  // get users
-  async function getUsers() {
-    dispatch({ type: actionTypes.USER_LIST_REQUEST });
+  // update user
+  async function updateUser(id, updateDetails) {
+    dispatch({ type: actionTypes.USER_PROFILE_UPDATE_REQUEST });
     try {
-      const { data } = axios.get("/api/user/all");
-      dispatch({ type: actionTypes.USER_LIST_SUCCESS, payload: data });
+      const { data } = axios.put("/api/user/profile/" + id, updateDetails);
+      console.log(data);
+      Cookie.set("user", JSON.stringify(data));
+      dispatch({
+        type: actionTypes.USER_PROFILE_UPDATE_SUCCESS,
+        payload: data,
+      });
     } catch (error) {
       dispatch({
-        type: actionTypes.USER_LIST_FAIL,
+        type: actionTypes.USER_PROFILE_UPDATE_FAIL,
         payload: error.response.data.message,
       });
     }
   }
+  // get users
+  // async function getUsers() {
+  //   dispatch({ type: actionTypes.USER_LIST_REQUEST });
+  //   try {
+  //     const { data } = axios.get("/api/user/all");
+  //     dispatch({ type: actionTypes.USER_LIST_SUCCESS, payload: data });
+  //   } catch (error) {
+  //     dispatch({
+  //       type: actionTypes.USER_LIST_FAIL,
+  //       payload: error.response.data.message,
+  //     });
+  //   }
+  // }
 
   // logout user
   function logoutUser() {
@@ -102,8 +120,8 @@ function AuthContextProvider(props) {
         loginUser,
         logoutUser,
         register,
-        getUser,
         deleteUser,
+        updateUser,
       }}
     >
       {props.children}

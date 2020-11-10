@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import $ from "jquery";
 import Swal from "sweetalert2";
 import { Button, Form, Modal } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
 import { StoryContext } from "../contexts/StoryContext";
+import styled from "styled-components";
 
 export default function CreateStory() {
-  let history = useHistory();
   const { createStory, message, error, loading } = React.useContext(
     StoryContext
   );
@@ -65,11 +65,21 @@ export default function CreateStory() {
     const { name, value } = e.target;
     setStory({ ...story, [name]: value });
   };
+
+  $(document).ready(function () {
+    $("*[data-max]").keyup(function () {
+      let text_max = $(this).data("max");
+      let text_length = $(this).val().length;
+      let text_remaining = text_max - text_length;
+      $(".char-max-alert").html(`${text_length}/${text_remaining}`);
+    });
+  });
   return (
-    <React.Fragment>
+    <CreateContatiner>
       <span onClick={handleShow}>Create Story</span>
       <Modal show={show} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
+          {er && <span className="text-danger">{er}</span>}
           <Modal.Title>Story</Modal.Title>
           {loading && <div>Loading...</div>}
           {error && <div className="yellow-text">{error}</div>}
@@ -97,6 +107,7 @@ export default function CreateStory() {
               <Form.Control
                 autoFocus
                 required
+                maxlength="20"
                 type="text"
                 name="title"
                 value={story.title}
@@ -105,6 +116,7 @@ export default function CreateStory() {
             </Form.Group>
             <Form.Group controlId="content" bssize="large">
               <Form.Label>Content</Form.Label>
+              <span className="char-max-alert red-text ml-2"></span>
               <Form.Control
                 as="textarea"
                 value={story.content}
@@ -112,8 +124,8 @@ export default function CreateStory() {
                 type="text"
                 name="content"
                 required
-                max="50"
                 maxlength="250"
+                data-max="250"
               />
             </Form.Group>
           </Form>
@@ -134,6 +146,8 @@ export default function CreateStory() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </React.Fragment>
+    </CreateContatiner>
   );
 }
+
+const CreateContatiner = styled.div``;

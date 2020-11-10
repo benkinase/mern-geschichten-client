@@ -23,7 +23,6 @@ export default function Login(props) {
   React.useEffect(() => {
     if (user || msg) {
       props.history.push("/dashboard");
-      //return <Redirect to="/dashboard" />;
     }
     return () => {
       //cleanup
@@ -76,7 +75,7 @@ export default function Login(props) {
       password: newUser.password,
       image: url,
     };
-    //console.log(newUserData, "hi");
+    //console.log(newUserData);
     try {
       // send data to server
       register(newUserData);

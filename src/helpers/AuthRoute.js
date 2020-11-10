@@ -1,4 +1,3 @@
-// redirect to current page if logged in
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Cookie from "js-cookie";
