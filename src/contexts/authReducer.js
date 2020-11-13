@@ -11,16 +11,9 @@ export const initialState = {
   message: "",
 };
 
-initialState.user = Cookie.getJSON("user") || null;
-
-// const token = Cookie.getJSON("user") || null;
-
-// if (token.exp * 1000 < Date.now()) {
-//   Cookie.remove("user");
-// } else {
-//   initialState.user = token;
-
-// }
+// get current user
+const user = Cookie.getJSON("user") || null;
+initialState.user = user;
 
 export const AuthReducer = (state, action) => {
   console.log(state, action);
@@ -30,7 +23,7 @@ export const AuthReducer = (state, action) => {
     case actionTypes.USER_LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.profile,
         token: action.payload.token,
         loading: false,
         message: action.payload.message,
@@ -55,7 +48,7 @@ export const AuthReducer = (state, action) => {
     case actionTypes.USER_PROFILE_SUCCESS:
       return {
         ...state,
-        profile: action.payload,
+        user: action.payload,
         loading: false,
         message: action.payload.message,
       };
@@ -80,6 +73,7 @@ export const AuthReducer = (state, action) => {
       return {
         loading: false,
         user: null,
+        token: action.payload.token,
         message: action.payload,
       };
     case actionTypes.USER_PROFILE_DELETE_FAIL:

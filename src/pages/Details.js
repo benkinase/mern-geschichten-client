@@ -110,13 +110,13 @@ export default function Story(props) {
           <div className="row mx-auto">
             <div className="col-sm-12 col-md-6 mt-3 comments p-2">
               <h5>
-                {story?.comments?.length > 0 ? "Comments" : "No comment yet"}
+                {story?.comments?.length > 0 ? "Comments" : "No comments yet"}
               </h5>
               {story?.comments?.map((comment) => {
                 return (
                   <div className="comment">
                     <p key={comment._id} className="">
-                      <span>{comment?.username} = </span>
+                      <span>{comment?.profile.username} = </span>
                       {comment?.text}
                       <i className="fas fa-thrash-alt"></i>
                     </p>
@@ -133,7 +133,7 @@ export default function Story(props) {
 
 const SingleStory = styled.div`
   .single-p {
-    background-color: #b6ccce;
+    background-color: var(--detailsBg);
   }
 
   .comment-form textarea {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Signature() {
   return (
     <SignContainer>
-      <p className="signature ">built by gbenimako</p>
+      <p className="signature ">@gbenimako</p>
     </SignContainer>
   );
 }

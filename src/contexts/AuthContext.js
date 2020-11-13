@@ -19,7 +19,8 @@ function AuthContextProvider(props) {
     try {
       const { data } = await axios.post("/api/user/login", loginDetails);
       dispatch({ type: actionTypes.USER_LOGIN_SUCCESS, payload: data });
-      Cookie.set("user", JSON.stringify(data));
+      Cookie.set("user", JSON.stringify(data.profile));
+      Cookie.set("token", JSON.stringify(data.token));
     } catch (error) {
       dispatch({
         type: actionTypes.USER_LOGIN_FAIL,
@@ -78,11 +79,12 @@ function AuthContextProvider(props) {
     try {
       const { data } = axios.put("/api/user/profile/" + id, updateDetails);
       console.log(data);
-      Cookie.set("user", JSON.stringify(data));
+
       dispatch({
         type: actionTypes.USER_PROFILE_UPDATE_SUCCESS,
         payload: data,
       });
+      Cookie.set("user", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: actionTypes.USER_PROFILE_UPDATE_FAIL,
@@ -107,6 +109,7 @@ function AuthContextProvider(props) {
   // logout user
   function logoutUser() {
     Cookie.remove("user");
+    Cookie.remove("token");
     dispatch({ type: actionTypes.USER_LOGOUT });
   }
 

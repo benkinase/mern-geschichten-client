@@ -2,21 +2,24 @@
 
 :root {
   --mainBlue: #170f8b;
-  --Blue: #03042e;
-  --lightBlue: #0fa3f8;
-  --mainWhite: white;
-  --editWhite: #dfebf0;
+  --veryBlue: #030440;
+  --veryGreen: #083208;
+  --mainWhite: rgb(245, 252, 250);
+  --storyWhite: #ffffff;
   --mainDark: #232528;
   --mainYellow: #ffae00;
   --secYellow: #f7bb39;
-  --lightRed: #f10e8f;
-  --mainTransition: all 0.3s linear;
+  --someYellow: #cefa2e;
+  --lightRed: #ec86c0;
+  --mainTransition: all 0.4s linear;
   --mainSpacing: 0.3rem;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 3px rgba(0, 0, 0, 0.5);
-  --profileBg: #c0d5d0;
+  --profileBg: #feffff;
+  --profileColor: #04044f;
   --formBg: #678e82;
   --navbar: #55a49e;
+  --detailsBg: #ebf3f3;
 }
 ::selection {
   color: var(--lightRed);
@@ -103,7 +106,7 @@ body {
   font-weight: 700;
   margin-top: 0.3rem;
   outline: var(--mainYellow);
-  color: var(--Blue);
+  color: var(--veryBlue);
   letter-spacing: var(--mainSpacing);
   outline: none;
   border-color: var(--mainYellow);

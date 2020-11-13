@@ -45,10 +45,10 @@ export const storyReducer = (state, action) => {
     case actionTypes.STORY_DETAILS_FAIL:
       return { loading: false, error: action.payload };
 
-    case actionTypes.STORY_ADD_REQUEST:
+    case actionTypes.STORY_SAVE_REQUEST:
       return { loading: true };
 
-    case actionTypes.STORY_ADD_SUCCESS:
+    case actionTypes.STORY_SAVE_SUCCESS:
       return {
         ...state,
         stories: [action.payload],
@@ -56,23 +56,23 @@ export const storyReducer = (state, action) => {
         loading: false,
       };
 
-    case actionTypes.STORY_ADD_FAIL:
+    case actionTypes.STORY_SAVE_FAIL:
       return { loading: false, error: action.payload };
 
-    case actionTypes.STORY_UPDATE_REQUEST:
-      return { loading: true };
+    // case actionTypes.STORY_UPDATE_REQUEST:
+    //   return { loading: true };
 
-    case actionTypes.STORY_UPDATE_SUCCESS:
-      return {
-        ...state,
-        stories: state.stories?.map((story) =>
-          story.id === action.payload.id ? action.payload : story
-        ),
-        message: action.payload.message,
-        loading: false,
-      };
-    case actionTypes.STORY_UPDATE_FAIL:
-      return { loading: false, error: action.payload };
+    // case actionTypes.STORY_UPDATE_SUCCESS:
+    //   return {
+    //     ...state,
+    //     stories: state.stories?.map((story) =>
+    //       story.id === action.payload.id ? action.payload : story
+    //     ),
+    //     message: action.payload.message,
+    //     loading: false,
+    //   };
+    // case actionTypes.STORY_UPDATE_FAIL:
+    //   return { loading: false, error: action.payload };
 
     case actionTypes.STORY_DELETE_REQUEST:
       return { loading: true };

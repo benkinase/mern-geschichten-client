@@ -10,12 +10,14 @@ import StoryContent from "./pages/Details";
 import Dashboard from "./components/Dashboard";
 import Notfound from "./pages/Notfound";
 import AuthRoute from "./helpers/AuthRoute";
+import Signature from "./pages/Signature";
 
 function App() {
   return (
     <div className="app">
       <Router>
         <Header />
+        <Signature />
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/login" component={Login} />

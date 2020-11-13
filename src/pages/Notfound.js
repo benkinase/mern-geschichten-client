@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 function NotFound(props) {
   //console.log(props, "from notfound");
+  const { user } = React.useContext(AuthContext);
   return (
     <div className="h-50 bg-light container">
       <div className="container mt-5 py-5 ">
@@ -15,7 +17,10 @@ function NotFound(props) {
               <span className="text-danger">{props.location.pathname} </span>
               was not found
             </h3>
-            <Link to={"/"} className="btn btn-outline-info mt-4">
+            <Link
+              to={user ? "/dashboard" : "/"}
+              className="btn btn-outline-info mt-4"
+            >
               back home
             </Link>
           </div>

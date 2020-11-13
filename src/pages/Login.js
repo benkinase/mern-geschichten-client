@@ -64,7 +64,6 @@ const LoginContainer = styled.div`
     width: 360px;
     margin: 4rem auto;
     padding: 30px;
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
     box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64);
     background: var(--formBg);
     color: white;

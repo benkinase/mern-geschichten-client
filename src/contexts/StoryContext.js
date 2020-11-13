@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useReducer } from "react";
 import axios from "../axios";
+import Swal from "sweetalert2";
 import { AuthContext } from "./AuthContext";
 import { actionTypes } from "./actionTypes";
 import { storyReducer, initialState } from "./storyReducer";
@@ -15,6 +16,14 @@ const StoryProvider = (props) => {
     getPublicStories();
   }, [user]);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    background: "green",
+  });
+
   // load stories function
   async function getPublicStories() {
     try {
@@ -24,7 +33,7 @@ const StoryProvider = (props) => {
     } catch (error) {
       dispatch({
         type: actionTypes.STORY_LIST_FAIL,
-        payload: error.response.data.message,
+        payload: error.response?.data.message,
       });
     }
   }
@@ -70,33 +79,36 @@ const StoryProvider = (props) => {
     }
   }
 
-  // create a newstory
-  async function createStory(story) {
-    dispatch({ type: actionTypes.STORY_ADD_REQUEST, payload: story });
+  // create or update a newstory
+  async function saveStory(story) {
     try {
-      const { data } = await axios.post("/api/stories/new", story);
-      dispatch({ type: actionTypes.STORY_ADD_SUCCESS, payload: data });
+      dispatch({ type: actionTypes.STORY_SAVE_REQUEST, payload: story });
+      if (!story._id) {
+        const { data } = await axios.post("/api/stories/new", story);
+        dispatch({ type: actionTypes.STORY_SAVE_SUCCESS, payload: data });
+        Toast.fire({
+          type: "success",
+          title: "Item successfully added",
+        });
+      } else {
+        const { data } = await axios.put(
+          "/api/stories/update/" + story._id,
+          story
+        );
+        dispatch({ type: actionTypes.STORY_SAVE_SUCCESS, payload: data });
+        Toast.fire({
+          type: "success",
+          title: "Story successfully updated",
+        });
+      }
     } catch (error) {
-      console.log(error);
       dispatch({
-        type: actionTypes.STORY_ADD_FAIL,
+        type: actionTypes.STORY_SAVE_FAIL,
         payload: error.response.data.message,
       });
     }
   }
-  // update a story
-  async function updateStory(id, updstory) {
-    dispatch({ type: actionTypes.STORY_UPDATE_REQUEST, payload: id, updstory });
-    try {
-      const { data } = await axios.put("/api/stories/update/" + id, updstory);
-      dispatch({ type: actionTypes.STORY_UPDATE_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({
-        type: actionTypes.STORY_UPDATE_FAIL,
-        payload: error.response.data.message,
-      });
-    }
-  }
+
   // like a story
   async function likeStory(storyId) {
     dispatch({ type: actionTypes.STORY_LIKE_REQUEST, payload: storyId });
@@ -162,9 +174,9 @@ const StoryProvider = (props) => {
         loading: state.loading,
         message: state.message,
         error: state.error,
-        createStory,
+
         removeStory,
-        updateStory,
+        saveStory,
         getStory,
         getPrivateStories,
         likeStory,

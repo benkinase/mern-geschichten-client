@@ -16,10 +16,10 @@ export default function Welcome() {
               <p>& Enjoy your time on here</p>
             </div>
             <p className="d-flex justify-content-center mt-5">
-              <Nav.Link href="/signup" className="primary-btn mr-1">
+              <Nav.Link href="/signup" className="primary-btn signup-btn mr-1">
                 signup
               </Nav.Link>
-              <Nav.Link href="/login" className="primary-btn">
+              <Nav.Link href="/login" className="primary-btn login-btn">
                 login
               </Nav.Link>
             </p>
@@ -46,7 +46,7 @@ const WelcomeContainer = styled.div`
     width: 8rem;
     letter-spacing: var(--mainSpacing);
     color: var(--mainYellow);
-    background: var(--Blue);
+    background: linear-gradient(to right, var(--veryBlue), var(--veryGreen));
     padding: 0.4rem 0.9rem;
     border: 3px solid var(--mainDark);
     transition: var(--mainTransition);
@@ -57,7 +57,11 @@ const WelcomeContainer = styled.div`
   }
   .primary-btn:hover {
     background: transparent;
-    color: var(--Blue);
+    color: var(--veryBlue);
+  }
+  .login-btn {
+  }
+  .signup-btn {
   }
 
   @media screen and (max-width: 1000px) {

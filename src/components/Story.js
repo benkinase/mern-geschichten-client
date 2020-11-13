@@ -18,7 +18,9 @@ export default function Story({ story }) {
           </Card.Subtitle>
           <Card.Text> {moment(story.createdAt).fromNow()}</Card.Text>
           <hr className="blue-text" />
-          <Card.Link href={`/stories/${story._id}`}>Read</Card.Link>
+          <Card.Link href={`/stories/${story._id}`}>
+            <i className="fas fa-eye"></i>
+          </Card.Link>
           <Card.Link>
             {story?.likes?.includes(user?._id) ? (
               <i
@@ -27,7 +29,7 @@ export default function Story({ story }) {
                   unlikeStory(story?._id);
                   setTimeout(() => {
                     window.location.reload(false);
-                  }, 100);
+                  }, 150);
                 }}
               ></i>
             ) : (
@@ -37,7 +39,7 @@ export default function Story({ story }) {
                   likeStory(story?._id);
                   setTimeout(function () {
                     window.location.reload(false);
-                  }, 100);
+                  }, 150);
                 }}
               ></i>
             )}
@@ -52,9 +54,9 @@ export default function Story({ story }) {
 
 const StoryContainer = styled.div`
   .story {
-    background-color: #e2f5f1 !important;
+    background-color: var(--storyWhite) !important;
     border: none !important;
-    color: var(--Blue);
+    color: var(--veryBlue);
     width: 20rem;
     text-align: center;
   }
