@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import $ from "jquery";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import styled from "styled-components/macro";
 import { AuthContext } from "../contexts/AuthContext";
+import StyledLink from "../helpers/StyledLink";
 
 export default function Login() {
   let history = useHistory();
+  let location = useLocation();
   const { loginUser, error, loading, user } = React.useContext(AuthContext);
 
   const [email, setEmail] = useState("");
@@ -26,11 +29,24 @@ export default function Login() {
     loginUser(loginDetails);
   };
 
+  $(document).ready(function () {
+    if (location.pathname === "/login") {
+      $(".login").html("Signup");
+    }
+  });
+
   return (
     <LoginContainer>
       <div className="form mt-3 container">
         <form onSubmit={handleSubmit}>
-          <h4 className="text-center">Login</h4>
+          <h5 className="switch">
+            <StyledLink
+              to={location.pathname === "/login" ? "/signup" : ""}
+              className="text-center login"
+            >
+              Login
+            </StyledLink>
+          </h5>
           {loading && <div>Loading...</div>}
           {error && <div className="yellow-text">{error}</div>}
           <Form.Group controlId="email" bssize="large">
@@ -67,5 +83,9 @@ const LoginContainer = styled.div`
     box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64);
     background: var(--formBg);
     color: white;
+  }
+
+  .switch {
+    text-align: center;
   }
 `;

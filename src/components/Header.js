@@ -13,18 +13,15 @@ export default function NavbarStories() {
   const { searchStory, query } = useContext(StoryContext);
 
   $(document).ready(function () {
-    if (!user && location.pathname === "/signup") {
-      $("#logout").html("Click to login");
-    }
-    if (!user && location.pathname === "/login") {
-      $("#logout").html("Click to signup");
+    if (location.pathname === "/signup" || location.pathname === "/login") {
+      $("#logout").html("go back home");
     }
   });
 
   const guestLinks = (
     <Fragment>
       <Nav.Item>
-        <Nav.Link href="/signup" className="text-white"></Nav.Link>
+        <Nav.Link href={"/"} className="text-white"></Nav.Link>
       </Nav.Item>
     </Fragment>
   );
@@ -64,7 +61,7 @@ export default function NavbarStories() {
             className="white-bg"
             value={query}
             onChange={searchStory}
-            placeholder="Search for a story"
+            placeholder={user ? "Search for a story" : "Search"}
           />
         </Form>
       </Navbar.Collapse>

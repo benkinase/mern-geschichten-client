@@ -45,7 +45,7 @@ export default function Story(props) {
   return (
     <SingleStory className="container mt-5">
       {loading ? (
-        <Spinner title=" Page loading" />
+        <Spinner title="loading..." />
       ) : (
         <>
           <div className="row mx-auto ">
@@ -137,7 +137,7 @@ const SingleStory = styled.div`
   }
 
   .comment-form textarea {
-    background-color: #eff5f5;
+    background-color: white;
     color: purple;
   }
 

@@ -4,7 +4,7 @@
   --mainBlue: #170f8b;
   --veryBlue: #030440;
   --veryGreen: #083208;
-  --mainWhite: rgb(245, 252, 250);
+  --mainWhite: #f5fcfa;
   --storyWhite: #ffffff;
   --mainDark: #232528;
   --mainYellow: #ffae00;
@@ -19,22 +19,22 @@
   --profileColor: #04044f;
   --formBg: #678e82;
   --navbar: #55a49e;
-  --detailsBg: #ebf3f3;
+  --detailsBg: #d3e7e7;
 }
 ::selection {
   color: var(--lightRed);
 }
+
 body {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
 .app {
-  height: 100vh;
-  background-color: var(--mainWhite);
+  min-height: 100vh;
+  background: var(--mainWhite);
 }
 .navbar {
   background: var(--navbar);
@@ -63,7 +63,7 @@ body {
   font-family: "Poppins", sans-serif !important;
 }
 .bold-text {
-  color: var(--Blue);
+  color: var(--veryBlue);
   font-weight: 500;
 }
 .light-blue {

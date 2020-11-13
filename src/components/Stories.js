@@ -32,7 +32,6 @@ const StoriesContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
-    margin-bottom: 1rem;
   }
   @media screen and (max-width: 1000px) {
     .stories {
@@ -46,5 +45,6 @@ const StoriesContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
+    padding-bottom:2rem;
   }
 `;

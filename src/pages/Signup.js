@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import $ from "jquery";
+import { useLocation, Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import styled from "styled-components/macro";
 import { AuthContext } from "../contexts/AuthContext";
+import StyledLink from "../helpers/StyledLink";
 
 export default function Login(props) {
+  let location = useLocation();
   const { register, loading, error, user, msg } = React.useContext(AuthContext);
   const [err, setErr] = useState();
   const [newUser, setNewUser] = React.useState({
@@ -90,12 +94,25 @@ export default function Login(props) {
     setNewUser({ ...newUser, [name]: value });
   };
 
+  $(document).ready(function () {
+    if (location.pathname === "/signup") {
+      $(".signup").html("Login");
+    }
+  });
+
   return (
     <SignupContainer>
       <div className="form-container">
         <Form onSubmit={handleSubmit}>
           {err && <span className="text-danger">{err}</span>}
-          <h4 className="text-center">Register</h4>
+          <h5 className="switch">
+            <StyledLink
+              to={location.pathname === "/signup" ? "/login" : ""}
+              className="text-center signup"
+            >
+              Login
+            </StyledLink>
+          </h5>
           {loading && <div>Loading...</div>}
           {error && <div className="yellow-text">{error}</div>}
           <Form.Group controlId="email" bssize="large">
@@ -153,6 +170,9 @@ const SignupContainer = styled.div`
     box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64);
     background: var(--formBg);
     color: white;
+  }
+  .switch {
+    text-align: center;
   }
     
   }

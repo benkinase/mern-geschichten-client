@@ -286,7 +286,7 @@ export default function Profile() {
 
                 <span className="profile-search">
                   <div className="btn btn-outline-secondary mt-1 ">
-                    {`Hallo ${user?.username}`}
+                    {`Hallo, ${user?.username}`}
                   </div>
                 </span>
               </div>
