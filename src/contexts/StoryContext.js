@@ -114,6 +114,7 @@ const StoryProvider = (props) => {
     dispatch({ type: actionTypes.STORY_LIKE_REQUEST, payload: storyId });
     try {
       const { data } = await axios.put("/api/stories/like/" + storyId);
+      getPublicStories();
       dispatch({ type: actionTypes.STORY_LIKE_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
@@ -127,6 +128,7 @@ const StoryProvider = (props) => {
     dispatch({ type: actionTypes.STORY_LIKE_REQUEST, payload: storyId });
     try {
       const { data } = await axios.put("/api/stories/unlike/" + storyId);
+      getPublicStories();
       dispatch({ type: actionTypes.STORY_LIKE_SUCCESS, payload: data });
     } catch (error) {
       dispatch({

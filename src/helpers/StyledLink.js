@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,7 +8,7 @@ const StyledLink = styled(Link)`
   transition: var(--mainTransition);
   &:hover {
     text-decoration: none;
-    color: yellowgreen !important;
+    color: #f3f7f6 !important;
   }
 `;
 export default (props) => <StyledLink {...props} />;

@@ -8,6 +8,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Story({ story }) {
   const { user } = React.useContext(AuthContext);
   const { likeStory, unlikeStory } = React.useContext(StoryContext);
+
   return (
     <StoryContainer>
       <Card className="story shadow" key={story._id}>
@@ -25,22 +26,12 @@ export default function Story({ story }) {
             {story?.likes?.includes(user?._id) ? (
               <i
                 className="fas fa-heart text-danger mr-2"
-                onClick={() => {
-                  unlikeStory(story?._id);
-                  setTimeout(() => {
-                    window.location.reload(false);
-                  }, 150);
-                }}
+                onClick={() => unlikeStory(story?._id)}
               ></i>
             ) : (
               <i
                 className="fas fa-heart"
-                onClick={() => {
-                  likeStory(story?._id);
-                  setTimeout(function () {
-                    window.location.reload(false);
-                  }, 150);
-                }}
+                onClick={() => likeStory(story?._id)}
               ></i>
             )}
             <span> {story?.likes?.length} likes</span>

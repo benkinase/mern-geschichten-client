@@ -10,21 +10,19 @@ export const initialState = {
   users: [],
   message: "",
 };
-
 // get current user
 const user = Cookie.getJSON("user") || null;
 initialState.user = user;
 
 export const AuthReducer = (state, action) => {
-  console.log(state, action);
+  //console.log(state, action);
   switch (action.type) {
     case actionTypes.USER_LOGIN_REQUEST:
       return { loading: true };
     case actionTypes.USER_LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.payload.profile,
-        token: action.payload.token,
+        user: action.payload,
         loading: false,
         message: action.payload.message,
       };
@@ -48,7 +46,7 @@ export const AuthReducer = (state, action) => {
     case actionTypes.USER_PROFILE_SUCCESS:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.profile,
         loading: false,
         message: action.payload.message,
       };

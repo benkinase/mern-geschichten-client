@@ -27,7 +27,7 @@ export default function Stories() {
 
 const StoriesContainer = styled.div`
   .stories {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 1rem;

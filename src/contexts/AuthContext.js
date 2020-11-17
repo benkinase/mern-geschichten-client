@@ -1,5 +1,6 @@
 import React, { useReducer, createContext } from "react";
 import Cookie from "js-cookie";
+import Swal from "sweetalert2";
 import axios from "../axios";
 import { actionTypes } from "./actionTypes";
 import { AuthReducer, initialState } from "./authReducer";
@@ -13,14 +14,22 @@ function AuthContextProvider(props) {
   //   getUsers();
   // }, [isAuth]);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    background: "green",
+    color: "white",
+  });
+
   // login existing user
   async function loginUser(loginDetails) {
     dispatch({ type: actionTypes.USER_LOGIN_REQUEST, payload: loginDetails });
     try {
       const { data } = await axios.post("/api/user/login", loginDetails);
+      Cookie.set("user", JSON.stringify(data));
       dispatch({ type: actionTypes.USER_LOGIN_SUCCESS, payload: data });
-      Cookie.set("user", JSON.stringify(data.profile));
-      Cookie.set("token", JSON.stringify(data.token));
     } catch (error) {
       dispatch({
         type: actionTypes.USER_LOGIN_FAIL,
@@ -109,8 +118,11 @@ function AuthContextProvider(props) {
   // logout user
   function logoutUser() {
     Cookie.remove("user");
-    Cookie.remove("token");
     dispatch({ type: actionTypes.USER_LOGOUT });
+    Toast.fire({
+      type: "success",
+      title: "Logout successful",
+    });
   }
 
   return (

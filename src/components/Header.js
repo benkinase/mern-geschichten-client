@@ -1,8 +1,7 @@
 import React, { useContext, Fragment } from "react";
 import { useLocation } from "react-router-dom";
-import $ from "jquery";
 import Navbar from "react-bootstrap/Navbar";
-import { Nav, Form, Button } from "react-bootstrap";
+import { Nav, Form, Button, Dropdown } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
 import { StoryContext } from "../contexts/StoryContext";
 import logo from "../logo.svg";
@@ -11,13 +10,7 @@ export default function NavbarStories() {
   let location = useLocation();
   const { logoutUser, user } = useContext(AuthContext);
   const { searchStory, query } = useContext(StoryContext);
-
-  $(document).ready(function () {
-    if (location.pathname === "/signup" || location.pathname === "/login") {
-      $("#logout").html("go back home");
-    }
-  });
-
+  //console.log(user);
   const guestLinks = (
     <Fragment>
       <Nav.Item>
@@ -28,10 +21,22 @@ export default function NavbarStories() {
   const authLinks = (
     <Fragment>
       <Nav.Item>
-        <Nav.Link href="/profile" className="text-white">
-          {location.pathname !== "/profile" ? user?.username : null}
-        </Nav.Link>
+        <Dropdown>
+          {user && location.pathname !== "/profile" && (
+            <>
+              <Dropdown.Toggle variant="warning mr-4" id="dropdown-basic">
+                {user?.username}
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="mt-3">
+                <Dropdown.Item href="/profile" className="text-info bg-light">
+                  Profile
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </>
+          )}
+        </Dropdown>
       </Nav.Item>
+
       <Nav.Item>
         <Nav.Link href={user ? "/dashboard" : "/"} className="text-white">
           {location.pathname !== "/dashboard" ? "Dashboard" : null}

@@ -18,4 +18,8 @@ const SignContainer = styled.div`
     1px 1px 0px rgba(0, 0, 0, 0.8);
   color: #333;
   opacity: 0.4;
+  transition: var(--mainTransition);
+  &:hover {
+    opacity: 1;
+  }
 `;

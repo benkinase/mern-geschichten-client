@@ -3,10 +3,11 @@ import Cookie from "js-cookie";
 
 // get token from user
 function AuthHeader() {
-  const token = Cookie.getJSON("token");
+  const user = Cookie.getJSON("user");
+  //console.log(user.token);
 
-  if (token) {
-    return { Authorization: `Bearer ${token}` };
+  if (user && user.token) {
+    return { Authorization: `Bearer ${user.token}` };
   } else {
     return {};
   }

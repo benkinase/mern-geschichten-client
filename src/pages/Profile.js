@@ -14,13 +14,21 @@ export default function Profile() {
     AuthContext
   );
   const { privateStories, getPrivateStories } = React.useContext(StoryContext);
-  //create story
   const {
     saveStory,
     removeStory,
     error: addError,
     loading: addLoading,
   } = React.useContext(StoryContext);
+
+  // get stories, load profile info
+  React.useEffect(() => {
+    if (user) {
+      getPrivateStories(user?._id);
+      setUsername(user.username);
+    }
+    return () => {};
+  }, [user]);
 
   const [er, setEr] = React.useState("");
   const [story, setStory] = React.useState({
@@ -29,10 +37,10 @@ export default function Profile() {
     content: "",
     status: "",
   });
+
   function validForm() {
     const validcontent = story.content.length > 10;
     const validtitle = story.title.length > 5;
-
     return validcontent && validtitle;
   }
 
@@ -51,58 +59,11 @@ export default function Profile() {
       if (!newStory) return false;
       saveStory(newStory);
       handleClose();
-      setTimeout(function () {
-        window.location.reload(false);
-      }, 200);
+      getPrivateStories(user?._id);
     } catch (err) {
       setEr(err);
     }
   }
-
-  // habndle story
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setStory({ ...story, [name]: value });
-  };
-
-  $(document).ready(function () {
-    $("*[data-max]").keyup(function () {
-      let text_max = $(this).data("max");
-      let text_length = $(this).val().length;
-      let text_remaining = text_max - text_length;
-      $(".char-max-alert").html(`${text_length}/${text_remaining}`);
-    });
-  });
-
-  // create story
-  const [username, setUsername] = React.useState("");
-  const [show, setShow] = React.useState(false);
-  const [isShow, setisShow] = React.useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const handleShowUser = () => setisShow(true);
-  const handleCloseUser = () => setisShow(false);
-
-  // get story, load profile info
-  React.useEffect(() => {
-    if (user) {
-      getPrivateStories(user?._id);
-      setUsername(user.username);
-    }
-
-    return () => {};
-  }, [user]);
-
-  // handle profile edit
-  const submitHandler = (e) => {
-    e.preventDefault();
-    updateUser(user?._id, { username });
-    handleClose();
-    setTimeout(function () {
-      window.location.reload(false);
-    }, 500);
-  };
-
   //edit story
   const openModal = (story) => {
     setShow(true);
@@ -113,6 +74,46 @@ export default function Profile() {
       status: story.status,
     });
   };
+
+  // handle variable change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setStory({ ...story, [name]: value });
+  };
+
+  //text counter
+  $(document).ready(function () {
+    $("*[data-max]").keyup(function () {
+      let text_max = $(this).data("max");
+      let text_length = $(this).val().length;
+      let text_remaining = text_max - text_length;
+      $(".char-max-alert").html(`${text_length}/${text_remaining}`);
+    });
+  });
+
+  // load profile info for update
+  const [username, setUsername] = React.useState("");
+
+  // modal: create and update story
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // modal: update user
+  const [isShow, setisShow] = React.useState(false);
+  //const handleShowUser = () => setisShow(true);
+  const handleCloseUser = () => setisShow(false);
+
+  // handle profile edit
+  const userUpdateHandler = (e) => {
+    e.preventDefault();
+    updateUser(user?._id, { username });
+    handleClose();
+    setTimeout(function () {
+      window.location.reload(false);
+    }, 500);
+  };
+
   return (
     <ProfileContainer className="mt-5 profile-page container">
       <div className="mt-2 profile ">
@@ -154,9 +155,6 @@ export default function Profile() {
                         "success"
                       );
                     }
-                    setTimeout(function () {
-                      window.location.reload(false);
-                    }, 300);
                   });
                 }}
               >
@@ -169,7 +167,7 @@ export default function Profile() {
               {isShow && (
                 <div>
                   {error && <span className="text-danger">{error}</span>}
-                  <Form onSubmit={submitHandler}>
+                  <Form>
                     <Form.Group controlId="username" bssize="large">
                       <Form.Control
                         autoFocus
@@ -189,7 +187,7 @@ export default function Profile() {
                   <Button
                     variant="info ml-2"
                     type="submit"
-                    onClick={submitHandler}
+                    onClick={userUpdateHandler}
                     className="text-blue"
                   >
                     Update
@@ -343,7 +341,7 @@ export default function Profile() {
                                   );
                                 }
                                 setTimeout(function () {
-                                  window.location.reload(false);
+                                  getPrivateStories(user?._id);
                                 }, 200);
                               });
                             }}

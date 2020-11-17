@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import $ from "jquery";
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import styled from "styled-components/macro";
 import { AuthContext } from "../contexts/AuthContext";

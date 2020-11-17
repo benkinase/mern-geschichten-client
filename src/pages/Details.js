@@ -28,7 +28,7 @@ export default function Story(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     makeComment(story._id, { text: value });
-    window.location.reload(false);
+    getStory(props.match.params.id);
     setValue({ text: "" });
   };
 
@@ -72,8 +72,8 @@ export default function Story(props) {
                     onClick={() => {
                       unlikeStory(story?._id);
                       setTimeout(function () {
-                        window.location.reload(false);
-                      }, 200);
+                        getStory(props.match.params.id);
+                      }, 100);
                     }}
                   ></i>
                 ) : (
@@ -82,8 +82,8 @@ export default function Story(props) {
                     onClick={() => {
                       likeStory(story?._id);
                       setTimeout(function () {
-                        window.location.reload(false);
-                      }, 200);
+                        getStory(props.match.params.id);
+                      }, 100);
                     }}
                   ></i>
                 )}
@@ -94,8 +94,8 @@ export default function Story(props) {
             <div className="comment-form col-sm-12 col-md-5 offset-md-1">
               <form onSubmit={handleSubmit} className="">
                 <textarea
-                  maxLength="100"
-                  data-max="100"
+                  maxLength="55"
+                  data-max="55"
                   type="text"
                   placeholder="Comment..."
                   onChange={(e) => setValue(e.target?.value)}
@@ -116,7 +116,7 @@ export default function Story(props) {
                 return (
                   <div className="comment">
                     <p key={comment._id} className="">
-                      <span>{comment?.profile.username} = </span>
+                      <span>{comment?.username} = </span>
                       {comment?.text}
                       <i className="fas fa-thrash-alt"></i>
                     </p>
@@ -135,7 +135,6 @@ const SingleStory = styled.div`
   .single-p {
     background-color: var(--detailsBg);
   }
-
   .comment-form textarea {
     background-color: white;
     color: purple;

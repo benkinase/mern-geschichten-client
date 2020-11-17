@@ -115,4 +115,9 @@ body {
   transition: var(--mainTransition);
   background: var(--secYellow);
   cursor: pointer;
+  outline: none;
+}
+
+.secondary-btn:hover:focus {
+  outline: none;
 }

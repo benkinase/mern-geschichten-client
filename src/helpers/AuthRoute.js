@@ -4,7 +4,7 @@ import Cookie from "js-cookie";
 
 function AuthRoute(props) {
   const isAuth = !!Cookie.getJSON("user");
-  //console.log(isAuth);
+  console.log(isAuth);
 
   if (isAuth) {
     return <Route {...props} />;
