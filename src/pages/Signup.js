@@ -104,7 +104,7 @@ export default function Login(props) {
     <SignupContainer>
       <div className="form-container">
         <Form onSubmit={handleSubmit}>
-          {err && <span className="text-danger">{err}</span>}
+          {err && <span className="red-text">{err}</span>}
           <h5 className="switch">
             <StyledLink
               to={location.pathname === "/signup" ? "/login" : ""}
@@ -114,9 +114,9 @@ export default function Login(props) {
             </StyledLink>
           </h5>
           {loading && <div>Loading...</div>}
-          {error && <div className="yellow-text">{error}</div>}
+          {error && <div className="red-text">{error}</div>}
           <Form.Group controlId="email" bssize="large">
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Email*</Form.Label>
             <Form.Control
               autoFocus
               type="email"
@@ -126,7 +126,7 @@ export default function Login(props) {
             />
           </Form.Group>
           <Form.Group controlId="email" bssize="large">
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Username*</Form.Label>
             <Form.Control
               autoFocus
               type="text"
@@ -136,7 +136,7 @@ export default function Login(props) {
             />
           </Form.Group>
           <Form.Group controlId="password" bssize="large">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Password*</Form.Label>
             <Form.Control
               value={newUser.password}
               onChange={handleChange}
@@ -148,6 +148,7 @@ export default function Login(props) {
             <Form.Label>Photo</Form.Label>
             <Form.Control
               autoFocus
+              className="file"
               type="file"
               onChange={(e) => setImage(e.target.files[0])}
             />
@@ -168,11 +169,14 @@ const SignupContainer = styled.div`
     margin: 2rem auto;
     padding: 30px;
     box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64);
-    background: var(--formBg);
+    background: var(--clr-primary-2);
     color: white;
   }
   .switch {
     text-align: center;
+  }
+  .file:focus{
+    outline:none;
   }
     
   }

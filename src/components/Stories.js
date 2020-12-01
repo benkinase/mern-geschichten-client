@@ -7,19 +7,19 @@ import Spinner from "./Spinner";
 
 export default function Stories() {
   const { stories, loading } = React.useContext(StoryContext);
-
-  return (
+  console.log(stories);
+  return loading ? (
+    <Spinner title="Stories loading..." />
+  ) : stories?.length === 0 ? (
+    <div>No stories found</div>
+  ) : (
     <Container>
       <StoriesContainer>
-        {loading ? (
-          <Spinner title="Stories loading..." />
-        ) : (
-          <div className="stories">
-            {stories?.map((story) => (
-              <Story story={story} key={story._id} />
-            ))}
-          </div>
-        )}
+        <div className="stories">
+          {stories?.map((story) => (
+            <Story story={story} key={story._id} />
+          ))}
+        </div>
       </StoriesContainer>
     </Container>
   );
@@ -33,7 +33,7 @@ const StoriesContainer = styled.div`
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
   }
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1060px) {
     .stories {
       display: grid;
       grid-template-columns: repeat(2, 2fr);

@@ -48,7 +48,7 @@ export default function Login() {
             </StyledLink>
           </h5>
           {loading && <div>Loading...</div>}
-          {error && <div className="yellow-text">{error}</div>}
+          {error && <div className="red-text">{error}</div>}
           <Form.Group controlId="email" bssize="large">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -67,7 +67,7 @@ export default function Login() {
             />
           </Form.Group>
           <button type="submit" className="secondary-btn">
-            Login
+            {loading ? "signing..." : "Login"}
           </button>
         </form>
       </div>
@@ -81,7 +81,7 @@ const LoginContainer = styled.div`
     margin: 4rem auto;
     padding: 30px;
     box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64);
-    background: var(--formBg);
+    background: var(--clr-primary-2);
     color: white;
   }
 

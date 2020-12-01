@@ -1,10 +1,12 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function SearchBar({ searching, query }) {
   return (
     <div>
       <Search
         autoFocus
+        className="search"
         type="text"
         className="search text-popins"
         placeholder="Search by title"
@@ -17,13 +19,17 @@ export default function SearchBar({ searching, query }) {
 
 let Search = styled.input`
   /* Searchbar*/
-  .search {
-    padding: 0.4rem;
-    background-color: #dfdcd6;
-    color: coral;
-    border-color: var(--Blue);
+  max-width: 150px;
+  padding: 0.3rem;
+  background-color: var(--clr-white-1);
+  color: var(--clr-primary-1);
+  border-color: var(--clr-grey-1);
+  border-top-left-radius: 0.9rem;
+  border-bottom-right-radius: 0.9rem;
+  &::placeholder {
+    color: var(--general-yellow);
   }
-  .search::placeholder {
-    color: var(--mainBlue);
+  &:focus {
+    outline: none;
   }
 `;

@@ -4,14 +4,16 @@ import styled from "styled-components";
 export default function Signature() {
   return (
     <SignContainer>
-      <p className="signature">@gbenimako</p>
+      <div className="container">
+        <p className="signature">@gbenimako</p>
+      </div>
     </SignContainer>
   );
 }
 
 const SignContainer = styled.div`
   position: sticky;
-  right: 3px;
+  right: 0px;
   bottom: 0px;
   padding: 1px 3px;
   text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3),

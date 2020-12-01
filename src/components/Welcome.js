@@ -45,10 +45,10 @@ const WelcomeContainer = styled.div`
     text-decoration: none;
     width: 8rem;
     letter-spacing: var(--mainSpacing);
-    color: var(--mainYellow);
-    background: linear-gradient(to right, var(--veryBlue), var(--veryGreen));
+    color: var(--button-color-1);
+    background: var(--button-color-4);
     padding: 0.4rem 0.9rem;
-    border: 3px solid var(--mainDark);
+    border: 3px solid var(--clr-grey-1);
     transition: var(--mainTransition);
     text-transform: uppercase;
     font-weight: 700;
@@ -57,11 +57,7 @@ const WelcomeContainer = styled.div`
   }
   .primary-btn:hover {
     background: transparent;
-    color: var(--veryBlue);
-  }
-  .login-btn {
-  }
-  .signup-btn {
+    color: var(--clr-grey-1);
   }
 
   @media screen and (max-width: 1000px) {

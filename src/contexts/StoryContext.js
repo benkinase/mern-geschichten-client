@@ -21,7 +21,7 @@ const StoryProvider = (props) => {
     position: "top-end",
     showConfirmButton: false,
     timer: 3000,
-    background: "green",
+    background: "white",
   });
 
   // load stories function
@@ -176,7 +176,6 @@ const StoryProvider = (props) => {
         loading: state.loading,
         message: state.message,
         error: state.error,
-
         removeStory,
         saveStory,
         getStory,

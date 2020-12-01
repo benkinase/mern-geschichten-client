@@ -19,8 +19,7 @@ function AuthContextProvider(props) {
     position: "top-end",
     showConfirmButton: false,
     timer: 3000,
-    background: "green",
-    color: "white",
+    background: "white",
   });
 
   // login existing user

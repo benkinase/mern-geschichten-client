@@ -18,14 +18,14 @@ export default function Story({ story }) {
             PostedBy: {story.user?.username}
           </Card.Subtitle>
           <Card.Text> {moment(story.createdAt).fromNow()}</Card.Text>
-          <hr className="blue-text" />
+          <hr className="bg-info" />
           <Card.Link href={`/stories/${story._id}`}>
             <i className="fas fa-eye"></i>
           </Card.Link>
           <Card.Link>
             {story?.likes?.includes(user?._id) ? (
               <i
-                className="fas fa-heart text-danger mr-2"
+                className="fas fa-heart red-text mr-2"
                 onClick={() => unlikeStory(story?._id)}
               ></i>
             ) : (
@@ -45,10 +45,15 @@ export default function Story({ story }) {
 
 const StoryContainer = styled.div`
   .story {
-    background-color: var(--storyWhite) !important;
+    background-color: var(--clr-white-1) !important;
     border: none !important;
-    color: var(--veryBlue);
+    color: var(--clr-grey-1);
     width: 20rem;
     text-align: center;
+  }
+
+  span {
+    color: var(--clr-grey-4) !important;
+    margin-left: 0.2rem;
   }
 `;

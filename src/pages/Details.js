@@ -114,8 +114,8 @@ export default function Story(props) {
               </h5>
               {story?.comments?.map((comment) => {
                 return (
-                  <div className="comment">
-                    <p key={comment._id} className="">
+                  <div className="comment" key={comment._id}>
+                    <p className="">
                       <span>{comment?.username} = </span>
                       {comment?.text}
                       <i className="fas fa-thrash-alt"></i>
@@ -133,7 +133,7 @@ export default function Story(props) {
 
 const SingleStory = styled.div`
   .single-p {
-    background-color: var(--detailsBg);
+    background-color: var(--clr-grey-5);
   }
   .comment-form textarea {
     background-color: white;
@@ -145,13 +145,13 @@ const SingleStory = styled.div`
     width: 100%;
   }
   .comment-form button {
-    background-color: #38778e;
-    color: var(--mainWhite);
+    background-color: var(--clr-grey-2);
+    color: var(--clr-white-1);
   }
 
   .comment-form button:hover {
-    background-color: #488e93;
-    color: var(--mainYellow);
+    background-color: var(--clr-grey-3);
+    color: var(--hover-color-1);
     transition: var(--mainTransition);
   }
   .comment-form textarea {
@@ -160,10 +160,11 @@ const SingleStory = styled.div`
   }
 
   .comments {
-    background-color: #bdd0d1;
+    background-color: var(--clr-grey-5);
+    margin-bottom: 1rem;
   }
   .comments p {
-    background-color: var(--mainWhite);
+    background-color: var(--clr-white-1);
     padding: 0.5rem;
     min-height: 5vh;
     overflow-y: scroll;

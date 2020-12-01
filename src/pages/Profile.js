@@ -115,8 +115,8 @@ export default function Profile() {
   };
 
   return (
-    <ProfileContainer className="mt-5 profile-page container">
-      <div className="mt-2 profile ">
+    <ProfileContainer className="mt-5 container">
+      <div className="mt-2 profile">
         <Row>
           <Col>
             <div className="shadow profile-left">
@@ -203,12 +203,10 @@ export default function Profile() {
                   <span onClick={handleShow}>Create Story</span>
                   <Modal show={show} onHide={handleClose} animation={true}>
                     <Modal.Header closeButton>
-                      {er && <span className="text-danger">{er}</span>}
+                      {er && <span className="red-text">{er}</span>}
                       <Modal.Title>Story</Modal.Title>
                       {addLoading && <div>Loading...</div>}
-                      {addError && (
-                        <div className="yellow-text">{addError}</div>
-                      )}
+                      {addError && <div className="red-text">{addError}</div>}
                     </Modal.Header>
                     <Modal.Body>
                       <Form className="container">
@@ -306,7 +304,7 @@ export default function Profile() {
                         <td>
                           <Link
                             to={"/stories/" + story._id}
-                            className="blue-text"
+                            className="red-text"
                           >
                             {story.title}
                           </Link>
@@ -362,21 +360,19 @@ export default function Profile() {
 
 const ProfileContainer = styled.div`
   /**profile*/
-  .profile-page {
-    background-color: white;
-    color: var(--veryBlue);
-  }
+  color: var(--clr-primary-1);
+
   .profile-right {
     min-height: 50vh;
     padding: 1rem;
-    background-color: var(--profileBg);
+    background-color: var(--clr-white-1);
   }
   .profile-left {
-    background-color: var(--profileBg);
+    background-color: var(--clr-white-1);
     padding: 1rem;
     max-height: 60vh;
     max-width: 400px;
-    color: var(--mainDark);
+    color: var(--clr-grey-1);
   }
 
   .profile-details {
@@ -398,13 +394,17 @@ const ProfileContainer = styled.div`
     justify-content: space-between;
   }
   .create-btn {
-    background: #cefa2e;
+    background: var(--clr-primary-2);
+    color: white;
     outline: none;
-    padding: 0.3rem;
+    padding: 0.3rem 0.6rem 0.4rem;
     border: none;
     transition: var(--mainTransition);
     &:hover {
-      background: #90f310;
+      background: var(--clr-grey-2);
+    }
+    &:focus {
+      outline: none;
     }
   }
   .table {
