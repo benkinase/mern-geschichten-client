@@ -26,7 +26,7 @@ function AuthContextProvider(props) {
   async function loginUser(loginDetails) {
     dispatch({ type: actionTypes.USER_LOGIN_REQUEST, payload: loginDetails });
     try {
-      const { data } = await axios.post("/api/user/login", loginDetails);
+      const { data } = await axios.post("/api/user/signin", loginDetails);
       Cookie.set("user", JSON.stringify(data));
       dispatch({ type: actionTypes.USER_LOGIN_SUCCESS, payload: data });
     } catch (error) {

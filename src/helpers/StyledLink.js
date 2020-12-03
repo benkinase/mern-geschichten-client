@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: white !important;
+  color: var(--clr-grey-5) !important;
   transition: var(--mainTransition);
   &:hover {
     text-decoration: none;
-    color: #f3f7f6 !important;
+    color: white !important;
   }
 `;
 export default (props) => <StyledLink {...props} />;

@@ -51,7 +51,7 @@ export const storyReducer = (state, action) => {
     case actionTypes.STORY_SAVE_SUCCESS:
       return {
         ...state,
-        stories: [action.payload],
+        stories: action.payload,
         message: action.payload.message,
         loading: false,
       };

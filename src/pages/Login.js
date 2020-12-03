@@ -13,6 +13,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [icon, setIcon] = useState("fa fa-lock");
 
   React.useEffect(() => {
     if (user) {
@@ -28,6 +29,17 @@ export default function Login() {
     const loginDetails = { email, password };
     loginUser(loginDetails);
   };
+
+  function togglePass() {
+    let pass = document.querySelector(".pass");
+    if (pass.type === "password") {
+      pass.type = "text";
+      setIcon("fa fa-unlock");
+    } else {
+      pass.type = "password";
+      setIcon("fa fa-lock");
+    }
+  }
 
   $(document).ready(function () {
     if (location.pathname === "/login") {
@@ -60,11 +72,15 @@ export default function Login() {
           </Form.Group>
           <Form.Group controlId="password" bssize="large">
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-            />
+            <div className="passContainer">
+              <Form.Control
+                className="form-control pass"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+              />
+              <i className={icon} onClick={togglePass} aria-hidden="true"></i>
+            </div>
           </Form.Group>
           <button type="submit" className="secondary-btn">
             {loading ? "signing..." : "Login"}
@@ -87,5 +103,25 @@ const LoginContainer = styled.div`
 
   .switch {
     text-align: center;
+  }
+
+  .form-control:focus {
+    background: var(--clr-grey-6);
+    outline: none;
+  }
+  .passContainer {
+    position: relative;
+    display: flex;
+  }
+  .fa-lock,
+  .fa-unlock {
+    position: absolute;
+    right: 8px;
+    top: 12px;
+    color: var(--button-color-5);
+  }
+  .fa-lock:hover,
+  .fa-unlock:hover {
+    cursor: pointer;
   }
 `;
