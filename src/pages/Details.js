@@ -17,12 +17,16 @@ export default function Story(props) {
   } = React.useContext(StoryContext);
   const { user } = React.useContext(AuthContext);
   const [value, setValue] = React.useState({ text: "" });
+  const [isMounted, setIsMounted] = React.useState(false);
 
   // get single story
   React.useEffect(() => {
-    getStory(props.match.params.id);
-    return () => {};
-  }, [props.match.params.id]);
+    setIsMounted(true);
+    isMounted && getStory(props.match.params.id);
+    return () => {
+      setIsMounted(false);
+    };
+  }, [isMounted, props.match.params.id]);
 
   // post comment handler
   const handleSubmit = (e) => {
@@ -45,7 +49,7 @@ export default function Story(props) {
   return (
     <SingleStory className="container mt-5">
       {loading ? (
-        <Spinner title="loading..." />
+        <Spinner title="story loading..." />
       ) : (
         <>
           <div className="row mx-auto ">
@@ -71,9 +75,7 @@ export default function Story(props) {
                     className="fas fa-thumbs-down mr-3"
                     onClick={() => {
                       unlikeStory(story?._id);
-                      setTimeout(function () {
-                        getStory(props.match.params.id);
-                      }, 100);
+                      getStory(props.match.params.id);
                     }}
                   ></i>
                 ) : (
@@ -81,9 +83,7 @@ export default function Story(props) {
                     className="fas fa-thumbs-up"
                     onClick={() => {
                       likeStory(story?._id);
-                      setTimeout(function () {
-                        getStory(props.match.params.id);
-                      }, 100);
+                      getStory(props.match.params.id);
                     }}
                   ></i>
                 )}

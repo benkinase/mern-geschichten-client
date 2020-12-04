@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
-import Editing from "./pages/EditStory";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import StoryContent from "./pages/Details";
@@ -24,7 +23,6 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <AuthRoute exact path="/dashboard" component={Dashboard} />
           <AuthRoute exact path="/stories/:id" component={StoryContent} />
-          <AuthRoute exact path="/story/edit/:id" component={Editing} />
           <AuthRoute exact path="/profile" component={Profile} />
           <Route exact path="**" component={Notfound} />
         </Switch>

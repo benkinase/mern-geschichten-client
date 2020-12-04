@@ -4,7 +4,6 @@ import Cookie from "js-cookie";
 // get token from user
 function AuthHeader() {
   const user = Cookie.getJSON("user");
-  //console.log(user.token);
 
   if (user && user.token) {
     return { authorization: `Bearer ${user.token}` };
@@ -12,10 +11,9 @@ function AuthHeader() {
     return {};
   }
 }
-//
-
+// create axios instance
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEN_URL,
+  baseURL: process.env.REACT_APP_BACKEN_URL, //|| "http://localhost:5000/",
   headers: AuthHeader(),
 });
 

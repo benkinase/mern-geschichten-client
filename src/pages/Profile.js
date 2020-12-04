@@ -9,7 +9,7 @@ import { Row, Col, Modal, Button, Form } from "react-bootstrap";
 import { StoryContext } from "../contexts/StoryContext";
 const avatar = "http://www.nretnil.com/avatar/LawrenceEzekielAmos.png";
 
-export default function Profile() {
+export default function Profile(props) {
   const { user, deleteUser, error, logoutUser, updateUser } = React.useContext(
     AuthContext
   );
@@ -20,15 +20,17 @@ export default function Profile() {
     error: addError,
     loading: addLoading,
   } = React.useContext(StoryContext);
+  const [isMounted, setIsMounted] = React.useState(false);
 
-  // get stories, load profile info
+  // get single story
   React.useEffect(() => {
-    if (user) {
-      getPrivateStories(user?._id);
-      setUsername(user.username);
-    }
-    return () => {};
-  }, [user]);
+    setIsMounted(true);
+    isMounted && user && getPrivateStories(user?._id);
+    setUsername(user.username);
+    return () => {
+      setIsMounted(false);
+    };
+  }, [user, isMounted, props.match.params.id]);
 
   const [er, setEr] = React.useState("");
   const [story, setStory] = React.useState({
@@ -91,7 +93,7 @@ export default function Profile() {
     });
   });
 
-  // load profile info for update
+  // set loaded/updated profile info
   const [username, setUsername] = React.useState("");
 
   // modal: create and update story
@@ -287,7 +289,7 @@ export default function Profile() {
                 </span>
               </div>
               {privateStories?.length === 0 ? (
-                <p>You have no stories!</p>
+                <p className="no-stories">You have no stories!</p>
               ) : (
                 <table className="table">
                   <thead>
@@ -394,7 +396,7 @@ const ProfileContainer = styled.div`
     justify-content: space-between;
   }
   .create-btn {
-    background: var(--clr-primary-2);
+    background: var(--clr-grey-3);
     color: white;
     outline: none;
     padding: 0.3rem 0.6rem 0.4rem;
@@ -406,6 +408,13 @@ const ProfileContainer = styled.div`
     &:focus {
       outline: none;
     }
+  }
+  .no-stories {
+    margin: 50px auto;
+    background: var(--clr-grey-5);
+    text-align: center;
+    padding: 1rem 0rem;
+    color: var(--button-color-0);
   }
   .table {
     margin-top: 1rem;

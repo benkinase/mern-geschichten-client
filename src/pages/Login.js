@@ -13,11 +13,13 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginErr, setLoginErr] = useState("");
   const [icon, setIcon] = useState("fa fa-lock");
 
   React.useEffect(() => {
     if (user) {
       history.push("/dashboard");
+      window.location.reload(false);
     }
     return () => {
       //cleanup
@@ -26,10 +28,19 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      setLoginErr("Please fill in all the fields");
+      return false;
+    } else if (!email.includes("@")) {
+      setLoginErr("Please enter a valid email");
+      return false;
+    }
     const loginDetails = { email, password };
     loginUser(loginDetails);
+    setLoginErr("");
   };
 
+  // toggle password visibility
   function togglePass() {
     let pass = document.querySelector(".pass");
     if (pass.type === "password") {
@@ -40,7 +51,7 @@ export default function Login() {
       setIcon("fa fa-lock");
     }
   }
-
+  // handle login/signup switch
   $(document).ready(function () {
     if (location.pathname === "/login") {
       $(".login").html("Signup");
@@ -55,12 +66,11 @@ export default function Login() {
             <StyledLink
               to={location.pathname === "/login" ? "/signup" : ""}
               className="text-center login"
-            >
-              Login
-            </StyledLink>
+            ></StyledLink>
           </h5>
           {loading && <div>Loading...</div>}
           {error && <div className="red-text">{error}</div>}
+          {loginErr && <div className="red-text">{loginErr}</div>}
           <Form.Group controlId="email" bssize="large">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -91,12 +101,13 @@ export default function Login() {
   );
 }
 
+// scoped styling
 const LoginContainer = styled.div`
   form {
     width: 360px;
     margin: 4rem auto;
     padding: 30px;
-    box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64);
+    ${"" /* box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64); */}
     background: var(--clr-primary-2);
     color: white;
   }
@@ -106,7 +117,7 @@ const LoginContainer = styled.div`
   }
 
   .form-control:focus {
-    background: var(--clr-grey-6);
+    background: #dcdad1;
     outline: none;
   }
   .passContainer {
@@ -118,10 +129,12 @@ const LoginContainer = styled.div`
     position: absolute;
     right: 8px;
     top: 12px;
-    color: var(--button-color-5);
+    color: var(--button-color-0);
+    transition: var(--mainTransition);
   }
   .fa-lock:hover,
   .fa-unlock:hover {
     cursor: pointer;
+    color: var(--button-color-1);
   }
 `;

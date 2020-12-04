@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 function NotFound(props) {
-  //console.log(props, "from notfound");
   const { user } = React.useContext(AuthContext);
   return (
     <div className="h-50 bg-light container">

@@ -5,13 +5,27 @@ import { StoryContext } from "../contexts/StoryContext";
 import Story from "./Story";
 import Spinner from "./Spinner";
 
+const NoStories = () => (
+  <div className="h-50 bg-light container">
+    <div className="container mt-5 py-5 ">
+      <div className="row">
+        <div className=" col-10 mx-auto text-title text-center">
+          <h4>Story search error</h4>
+          <h2>No match found!</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function Stories() {
   const { stories, loading } = React.useContext(StoryContext);
-  console.log(stories);
+  //console.log(stories);
+
   return loading ? (
     <Spinner title="Stories loading..." />
   ) : stories?.length === 0 ? (
-    <div>No stories found</div>
+    <div>{<NoStories />}</div>
   ) : (
     <Container>
       <StoriesContainer>

@@ -9,7 +9,7 @@ import StyledLink from "../helpers/StyledLink";
 export default function Login(props) {
   let location = useLocation();
   const { register, loading, error, user, msg } = React.useContext(AuthContext);
-  const [err, setErr] = useState();
+  const [err, setSignUpErr] = useState();
   const [newUser, setNewUser] = React.useState({
     email: "",
     username: "",
@@ -17,6 +17,7 @@ export default function Login(props) {
   });
   const [image, setImage] = React.useState("");
   const [url, setUrl] = React.useState("");
+  const [icon, setIcon] = useState("fa fa-lock");
 
   React.useEffect(() => {
     if (url) {
@@ -49,15 +50,14 @@ export default function Login(props) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setUrl(data.url);
-          setErr("");
+          setSignUpErr("");
         })
         .catch((err) => {
-          setErr(err);
+          setSignUpErr(err);
         });
     } else {
-      return setErr("invalid image type");
+      return setSignUpErr("invalid image type");
     }
   };
 
@@ -71,21 +71,25 @@ export default function Login(props) {
     }
   }
 
-  // collects all fielsd, after url is available
+  // collects all field, after url is available
   const collectFields = () => {
+    if (!newUser.email || !newUser.password || !newUser.username) {
+      setSignUpErr("Please fill in all the fields");
+      return false;
+    } else if (newUser.password.length < 6) {
+      setSignUpErr("Password must be atleast 6 characters");
+      return false;
+    }
     const newUserData = {
       username: newUser.username,
       email: newUser.email,
       password: newUser.password,
       image: url,
     };
-    //console.log(newUserData);
     try {
-      // send data to server
       register(newUserData);
-      // Swall mesage
     } catch (err) {
-      setErr(err);
+      setSignUpErr(err);
     }
   };
 
@@ -100,21 +104,31 @@ export default function Login(props) {
     }
   });
 
+  // toggle password visibility
+  function togglePass() {
+    let pass = document.querySelector(".pass");
+    if (pass.type === "password") {
+      pass.type = "text";
+      setIcon("fa fa-unlock");
+    } else {
+      pass.type = "password";
+      setIcon("fa fa-lock");
+    }
+  }
+
   return (
     <SignupContainer>
       <div className="form-container">
         <Form onSubmit={handleSubmit}>
-          {err && <span className="red-text">{err}</span>}
           <h5 className="switch">
             <StyledLink
               to={location.pathname === "/signup" ? "/login" : ""}
               className="text-center signup"
-            >
-              Login
-            </StyledLink>
+            ></StyledLink>
           </h5>
           {loading && <div>Loading...</div>}
           {error && <div className="red-text">{error}</div>}
+          {err && <span className="red-text">{err}</span>}
           <Form.Group controlId="email" bssize="large">
             <Form.Label>Email*</Form.Label>
             <Form.Control
@@ -137,12 +151,17 @@ export default function Login(props) {
           </Form.Group>
           <Form.Group controlId="password" bssize="large">
             <Form.Label>Password*</Form.Label>
-            <Form.Control
-              value={newUser.password}
-              onChange={handleChange}
-              type="password"
-              name="password"
-            />
+
+            <div className="passContainer">
+              <Form.Control
+                className="form-control pass"
+                value={newUser.password}
+                onChange={handleChange}
+                type="password"
+                name="password"
+              />
+              <i className={icon} onClick={togglePass} aria-hidden="true"></i>
+            </div>
           </Form.Group>
           <Form.Group controlId="email" bssize="large">
             <Form.Label>Photo</Form.Label>
@@ -163,21 +182,41 @@ export default function Login(props) {
   );
 }
 
+// scoped styling
 const SignupContainer = styled.div`
   form {
     width: 360px;
     margin: 2rem auto;
-    padding: 30px;
-    box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64);
+    padding: 25px 30px;
+    ${"" /* box-shadow: inset 5px 5px 15px 5px rgba(0, 0, 0, 0.64); */}
     background: var(--clr-primary-2);
     color: white;
   }
   .switch {
     text-align: center;
   }
-  .file:focus{
-    outline:none;
+  .file:focus {
+    outline: none;
   }
-    
+  .form-control:focus {
+    background: #dcdad1;
+    outline: none;
+  }
+  .passContainer {
+    position: relative;
+    display: flex;
+  }
+  .fa-lock,
+  .fa-unlock {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    color: var(--button-color-0);
+    transition: var(--mainTransition);
+  }
+  .fa-lock:hover,
+  .fa-unlock:hover {
+    cursor: pointer;
+    color: var(--button-color-1);
   }
 `;

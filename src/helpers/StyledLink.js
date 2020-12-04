@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: var(--clr-grey-5) !important;
+  color: var(--button-color-0) !important;
   transition: var(--mainTransition);
   &:hover {
     text-decoration: none;

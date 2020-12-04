@@ -10,11 +10,16 @@ const StoryContext = createContext(initialState);
 const StoryProvider = (props) => {
   const [state, dispatch] = useReducer(storyReducer, initialState);
   const { user } = React.useContext(AuthContext);
+  const [isMounted, setIsMounted] = React.useState(false);
 
   // load stories when component is mounted
   useEffect(() => {
-    getPublicStories();
-  }, [user]);
+    setIsMounted(true);
+    isMounted && user && getPublicStories();
+    return () => {
+      setIsMounted(false);
+    };
+  }, [user, isMounted]);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -180,6 +185,7 @@ const StoryProvider = (props) => {
         saveStory,
         getStory,
         getPrivateStories,
+        getPublicStories,
         likeStory,
         unlikeStory,
         makeComment,

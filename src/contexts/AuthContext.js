@@ -10,10 +10,7 @@ const AuthContext = createContext(initialState);
 function AuthContextProvider(props) {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  // React.useEffect(() => {
-  //   getUsers();
-  // }, [isAuth]);
-
+  // sweetalert mixin
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -36,7 +33,6 @@ function AuthContextProvider(props) {
       });
     }
   }
-
   // register newUser
   async function register(newUser) {
     dispatch({ type: actionTypes.USER_REGISTER_REQUEST, payload: newUser });
@@ -50,20 +46,6 @@ function AuthContextProvider(props) {
       });
     }
   }
-
-  // // get user
-  // async function getUser(id) {
-  //   dispatch({ type: actionTypes.USER_PROFILE_REQUEST, payload: id });
-  //   try {
-  //     const { data } = await axios.get("/api/user/profile/" + id);
-  //     dispatch({ type: actionTypes.USER_PROFILE_SUCCESS, payload: data });
-  //   } catch (error) {
-  //     dispatch({
-  //       type: actionTypes.USER_PROFILE_FAIL,
-  //       payload: error.response.data.message,
-  //     });
-  //   }
-  // }
 
   // remove user
   async function deleteUser(id) {
@@ -100,19 +82,6 @@ function AuthContextProvider(props) {
       });
     }
   }
-  // get users
-  // async function getUsers() {
-  //   dispatch({ type: actionTypes.USER_LIST_REQUEST });
-  //   try {
-  //     const { data } = axios.get("/api/user/all");
-  //     dispatch({ type: actionTypes.USER_LIST_SUCCESS, payload: data });
-  //   } catch (error) {
-  //     dispatch({
-  //       type: actionTypes.USER_LIST_FAIL,
-  //       payload: error.response.data.message,
-  //     });
-  //   }
-  // }
 
   // logout user
   function logoutUser() {

@@ -6,7 +6,6 @@ export default function SearchBar({ searching, query }) {
     <div>
       <Search
         autoFocus
-        className="search"
         type="text"
         className="search text-popins"
         placeholder="Search by title"
