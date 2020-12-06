@@ -20,25 +20,19 @@ export default function Profile(props) {
     error: addError,
     loading: addLoading,
   } = React.useContext(StoryContext);
-  const [mounted, setMounted] = React.useState(false);
+  //const [mounted, setMounted] = React.useState(false);
 
-  // get user stories
-  // first, freeze getPrivateStories in a useCallBack
-  const callGetUserStories = React.useCallback(() => {
-    return () => mounted && user && getPrivateStories(user?._id);
-  }, [mounted, getPrivateStories, user]);
-
-  // call getPrivateStories via callGetUserStories
   React.useEffect(() => {
-    setMounted(true);
-    callGetUserStories();
-    setUsername(user?.username);
+    if (user) {
+      setUsername(user?.username);
+    }
     return () => {
-      setMounted(false);
+      //
     };
-  }, [callGetUserStories, user]);
+  }, [user]);
 
-  const [er, setEr] = React.useState("");
+  // create new story
+  const [hasError, setError] = React.useState("");
   const [story, setStory] = React.useState({
     id: "",
     title: "",
@@ -46,6 +40,7 @@ export default function Profile(props) {
     status: "",
   });
 
+  // validate fields
   function validForm() {
     const validcontent = story.content.length > 10;
     const validtitle = story.title.length > 5;
@@ -69,7 +64,7 @@ export default function Profile(props) {
       handleClose();
       getPrivateStories(user?._id);
     } catch (err) {
-      setEr(err);
+      setError(err);
     }
   }
   //edit story
@@ -211,7 +206,7 @@ export default function Profile(props) {
                   <span onClick={handleShow}>Create Story</span>
                   <Modal show={show} onHide={handleClose} animation={true}>
                     <Modal.Header closeButton>
-                      {er && <span className="red-text">{er}</span>}
+                      {hasError && <span className="red-text">{hasError}</span>}
                       <Modal.Title>Story</Modal.Title>
                       {addLoading && <div>Loading...</div>}
                       {addError && <div className="red-text">{addError}</div>}

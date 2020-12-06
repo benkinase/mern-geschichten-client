@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/macro";
 import moment from "moment";
 import { Card } from "react-bootstrap";
@@ -6,8 +6,8 @@ import { StoryContext } from "../contexts/StoryContext";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Story({ story }) {
-  const { user } = React.useContext(AuthContext);
-  const { likeStory, unlikeStory } = React.useContext(StoryContext);
+  const { user } = useContext(AuthContext);
+  const { likeStory, unlikeStory } = useContext(StoryContext);
 
   return (
     <StoryContainer>
