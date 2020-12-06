@@ -21,7 +21,6 @@ function AuthContextProvider(props) {
 
   // login existing user
   async function loginUser(loginDetails) {
-    console.log(loginDetails);
     dispatch({ type: actionTypes.USER_LOGIN_REQUEST, payload: loginDetails });
     try {
       const { data } = await axios.post("/api/user/signin", loginDetails);
