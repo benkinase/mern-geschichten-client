@@ -80,10 +80,8 @@ export const storyReducer = (state, action) => {
     case actionTypes.STORY_DELETE_SUCCESS:
       return {
         ...state,
-        stories: state.stories?.filter(
-          (story) => story?._id !== action.payload
-        ),
-        message: action.payload,
+        stories: state.stories?.filter((story) => story !== action.payload),
+        //message: action.payload,
         loading: false,
       };
 

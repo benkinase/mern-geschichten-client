@@ -17,16 +17,20 @@ export default function Story(props) {
   } = React.useContext(StoryContext);
   const { user } = React.useContext(AuthContext);
   const [value, setValue] = React.useState({ text: "" });
-  const [isMounted, setIsMounted] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
   // get single story
+  const callGetStory = React.useCallback(() => {
+    return () => mounted && getStory(props.match.params.id);
+  }, [mounted, getStory, props.match.params.id]);
+
   React.useEffect(() => {
-    setIsMounted(true);
-    isMounted && getStory(props.match.params.id);
+    setMounted(true);
+    callGetStory();
     return () => {
-      setIsMounted(false);
+      setMounted(false);
     };
-  }, [isMounted, props.match.params.id]);
+  }, [callGetStory]);
 
   // post comment handler
   const handleSubmit = (e) => {

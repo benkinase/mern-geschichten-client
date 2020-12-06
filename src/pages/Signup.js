@@ -20,12 +20,6 @@ export default function Login(props) {
   const [icon, setIcon] = useState("fa fa-lock");
 
   React.useEffect(() => {
-    if (url) {
-      collectFields();
-    }
-  }, [url]);
-
-  React.useEffect(() => {
     if (user || msg) {
       props.history.push("/dashboard");
     }
@@ -52,6 +46,7 @@ export default function Login(props) {
         .then((data) => {
           setUrl(data.url);
           setSignUpErr("");
+          collectFields(); // collect other  user inputs
         })
         .catch((err) => {
           setSignUpErr(err);
@@ -61,8 +56,8 @@ export default function Login(props) {
     }
   };
 
-  // trigger imageUpload // collectFields
-  async function handleSubmit(e) {
+  // trigger imageUpload || collectFields
+  function handleSubmit(e) {
     e.preventDefault();
     if (image) {
       imageUpload();
@@ -72,26 +67,23 @@ export default function Login(props) {
   }
 
   // collects all field, after url is available
-  const collectFields = () => {
-    if (!newUser.email || !newUser.password || !newUser.username) {
+  const collectFields = React.useCallback(() => {
+    //destructure newUser
+    const { username, email, password } = newUser;
+    if (!email || !password || !username) {
       setSignUpErr("Please fill in all the fields");
       return false;
-    } else if (newUser.password.length < 6) {
+    } else if (password.length < 6) {
       setSignUpErr("Password must be atleast 6 characters");
       return false;
     }
-    const newUserData = {
-      username: newUser.username,
-      email: newUser.email,
-      password: newUser.password,
-      image: url,
-    };
+    const newUserData = { username, email, password, image: url };
     try {
       register(newUserData);
     } catch (err) {
       setSignUpErr(err);
     }
-  };
+  }, [url, register, newUser]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -139,7 +131,7 @@ export default function Login(props) {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="email" bssize="large">
+          <Form.Group controlId="username" bssize="large">
             <Form.Label>Username*</Form.Label>
             <Form.Control
               autoFocus
@@ -163,7 +155,7 @@ export default function Login(props) {
               <i className={icon} onClick={togglePass} aria-hidden="true"></i>
             </div>
           </Form.Group>
-          <Form.Group controlId="email" bssize="large">
+          <Form.Group controlId="photo" bssize="large">
             <Form.Label>Photo</Form.Label>
             <Form.Control
               autoFocus

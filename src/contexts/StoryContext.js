@@ -45,7 +45,7 @@ const StoryProvider = (props) => {
   // load stories function
   async function getPrivateStories(userId) {
     try {
-      dispatch({ type: actionTypes.STORY_PRIVATE_REQUEST });
+      dispatch({ type: actionTypes.STORY_PRIVATE_REQUEST, payload: userId });
       const { data } = await axios.get("/api/stories/user/" + userId);
       dispatch({ type: actionTypes.STORY_PRIVATE_SUCCESS, payload: data });
     } catch (error) {
@@ -71,11 +71,11 @@ const StoryProvider = (props) => {
   }
 
   // remove a story
-  async function removeStory(id) {
-    dispatch({ type: actionTypes.STORY_DELETE_REQUEST, payload: id });
+  async function removeStory(story) {
+    dispatch({ type: actionTypes.STORY_DELETE_REQUEST, payload: story });
     try {
-      const { data } = axios.delete("/api/stories/remove/" + id);
-      dispatch({ type: actionTypes.STORY_DELETE_SUCCESS, payload: data });
+      dispatch({ type: actionTypes.STORY_DELETE_SUCCESS, payload: story });
+      await axios.delete("/api/stories/remove/" + story._id);
     } catch (error) {
       dispatch({
         type: actionTypes.STORY_DELETE_FAIL,
@@ -119,8 +119,8 @@ const StoryProvider = (props) => {
     dispatch({ type: actionTypes.STORY_LIKE_REQUEST, payload: storyId });
     try {
       const { data } = await axios.put("/api/stories/like/" + storyId);
-      getPublicStories();
       dispatch({ type: actionTypes.STORY_LIKE_SUCCESS, payload: data });
+      getPublicStories();
     } catch (error) {
       dispatch({
         type: actionTypes.STORY_LIKE_FAIL,
@@ -133,8 +133,8 @@ const StoryProvider = (props) => {
     dispatch({ type: actionTypes.STORY_LIKE_REQUEST, payload: storyId });
     try {
       const { data } = await axios.put("/api/stories/unlike/" + storyId);
-      getPublicStories();
       dispatch({ type: actionTypes.STORY_LIKE_SUCCESS, payload: data });
+      getPublicStories();
     } catch (error) {
       dispatch({
         type: actionTypes.STORY_LIKE_FAIL,

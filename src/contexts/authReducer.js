@@ -71,8 +71,7 @@ export const AuthReducer = (state, action) => {
       return {
         loading: false,
         user: null,
-        token: action.payload.token,
-        message: action.payload,
+        isLoggedIn: false,
       };
     case actionTypes.USER_PROFILE_DELETE_FAIL:
       return { loading: false, error: action.payload };

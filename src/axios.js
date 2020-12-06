@@ -11,9 +11,10 @@ function AuthHeader() {
     return {};
   }
 }
+//process.env.REACT_APP_BACKEN_URL,
 // create axios instance
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEN_URL, //|| "http://localhost:5000/",
+  baseURL: "http://localhost:5000/",
   headers: AuthHeader(),
 });
 

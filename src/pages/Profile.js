@@ -20,17 +20,23 @@ export default function Profile(props) {
     error: addError,
     loading: addLoading,
   } = React.useContext(StoryContext);
-  const [isMounted, setIsMounted] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
-  // get single story
+  // get user stories
+  // first, freeze getPrivateStories in a useCallBack
+  const callGetUserStories = React.useCallback(() => {
+    return () => mounted && user && getPrivateStories(user?._id);
+  }, [mounted, getPrivateStories, user]);
+
+  // call getPrivateStories via callGetUserStories
   React.useEffect(() => {
-    setIsMounted(true);
-    isMounted && user && getPrivateStories(user?._id);
-    setUsername(user.username);
+    setMounted(true);
+    callGetUserStories();
+    setUsername(user?.username);
     return () => {
-      setIsMounted(false);
+      setMounted(false);
     };
-  }, [user, isMounted, props.match.params.id]);
+  }, [callGetUserStories, user]);
 
   const [er, setEr] = React.useState("");
   const [story, setStory] = React.useState({
@@ -333,7 +339,7 @@ export default function Profile(props) {
                                 confirmButtonText: "Yes, delete it!",
                               }).then((result) => {
                                 if (result.isConfirmed) {
-                                  removeStory(story._id);
+                                  removeStory(story);
                                   Swal.fire(
                                     "Deleted!",
                                     "The story has been deleted.",
