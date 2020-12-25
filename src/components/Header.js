@@ -31,23 +31,23 @@ export default function Header() {
 
   const authLinks = (
     <>
-      <li className="link">
-        <Nav.Link href={user ? "/dashboard" : "/"} className="a">
+      <li className='link'>
+        <Nav.Link href={user ? "/dashboard" : "/"} className='a'>
           {location.pathname !== "/dashboard" ? "Dashboard" : null}
         </Nav.Link>
       </li>
-      <li className="link">
+      <li className='link'>
         <Nav.Item>
           <Dropdown>
             {user && location.pathname !== "/profile" && (
               <>
-                <Dropdown.Toggle variant="warning mr-4 " id="dropdown-basic">
+                <Dropdown.Toggle variant='warning mr-4 ' id='dropdown-basic'>
                   {user?.username}
                 </Dropdown.Toggle>
-                <Dropdown.Menu className="mt-2 w-25">
+                <Dropdown.Menu className='mt-2 w-25'>
                   <Dropdown.Item
-                    href="/profile"
-                    className="text-success bg-white "
+                    href='/profile'
+                    className='text-success bg-white '
                   >
                     Manage profile
                   </Dropdown.Item>
@@ -57,10 +57,10 @@ export default function Header() {
           </Dropdown>
         </Nav.Item>
       </li>
-      <li className="link">
+      <li className='link'>
         <Form.Control
-          type="text"
-          className="white-bg"
+          type='text'
+          className='white-bg'
           value={query}
           onChange={searchStory}
           placeholder={user ? "Search for a story" : "Search"}
@@ -68,26 +68,34 @@ export default function Header() {
       </li>
     </>
   );
-  const guestLinks = <></>;
+  const guestLinks = (
+    <>
+      <li className='link'>
+        <NavLink to={"/dashboard"} className='a '>
+          Dashboard
+        </NavLink>
+      </li>
+    </>
+  );
 
   return (
     <HeaderContainer>
-      <nav className="nav" id="nav">
-        <div className="nav-center nav-content">
-          <div className="nav-header">
-            <img src={logo} alt="logo" className="logo mb-2" />
+      <nav className='nav' id='nav'>
+        <div className='nav-center nav-content'>
+          <div className='nav-header'>
+            <img src={logo} alt='logo' className='logo mb-2' />
             <Toggler toggle={toggle} isOpen={isOpen} />
           </div>
 
-          <ul className="nav-links ">
+          <ul className='nav-links '>
             {user ? authLinks : guestLinks}
 
-            <li className="link">
-              <NavLink to={"/"} className="a ">
+            <li className='link'>
+              <NavLink to={"/"} className='a '>
                 <button
                   onClick={user ? logoutUser : null}
-                  className="logout-btn"
-                  id="logout"
+                  className='logout-btn'
+                  id='logout'
                 >
                   {user ? "logout" : "Guest"}
                 </button>

@@ -23,7 +23,8 @@ const StoryProvider = (props) => {
   // load stories when component is mounted
   useEffect(() => {
     setMounted(true);
-    mounted && user && getPublicStories();
+    //mounted && user && getPublicStories();
+    mounted && getPublicStories();
     return () => {
       setMounted(false);
     };
@@ -131,7 +132,7 @@ const StoryProvider = (props) => {
     } catch (error) {
       dispatch({
         type: actionTypes.STORY_LIKE_FAIL,
-        payload: error.response.data.message,
+        payload: error?.response?.data?.message,
       });
     }
   }

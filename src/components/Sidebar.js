@@ -18,41 +18,49 @@ export function Sidebar({ isOpen, close }) {
 
   const authLinks = (
     <>
-      <li className="link ml-n3">
-        <Nav.Link href={user ? "/dashboard" : "/"} className="a">
+      <li className='link ml-n3'>
+        <Nav.Link href={user ? "/dashboard" : "/"} className='a'>
           {location.pathname !== "/dashboard" ? "Dashboard" : null}
         </Nav.Link>
       </li>
-      <li className="link ml-n3 mt-n3">
-        <Nav.Link href={"/profile"} className="a">
+      <li className='link ml-n3 mt-n3'>
+        <Nav.Link href={"/profile"} className='a'>
           {user?.username}
         </Nav.Link>
       </li>
 
-      <li className="link">
+      <li className='link'>
         <SearchBar query={query} searching={searchStory} />
       </li>
     </>
   );
-  const guestLinks = <></>;
+  const guestLinks = (
+    <>
+      <li className='link'>
+        <NavLink to={"/dashboard"} className='a '>
+          Dashboard
+        </NavLink>
+      </li>
+    </>
+  );
 
   return (
     <SidebarContainer>
       <aside className={drawClass}>
         <div>
-          <button className="close-btn" id="close-btn" onClick={close}>
-            <i className="fas fa-times"></i>
+          <button className='close-btn' id='close-btn' onClick={close}>
+            <i className='fas fa-times'></i>
           </button>
           <hr />
-          <ul className="sidebar-links">
+          <ul className='sidebar-links'>
             {user ? authLinks : guestLinks}
 
-            <li className="link">
-              <NavLink to={"/"} className="a">
+            <li className='link'>
+              <NavLink to={"/"} className='a'>
                 <button
                   onClick={user ? logoutUser : null}
-                  className="logout-btn"
-                  id="logout"
+                  className='logout-btn'
+                  id='logout'
                 >
                   {user ? "logout" : "Guest"}
                 </button>
@@ -60,25 +68,25 @@ export function Sidebar({ isOpen, close }) {
             </li>
           </ul>
 
-          <ul className="social-icons hero-social">
+          <ul className='social-icons hero-social'>
             <li>
               <a
-                href="https://www.github.com/benkinase"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
+                href='https://www.github.com/benkinase'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='social-icon'
               >
-                <i className="fab fa-github"></i>
+                <i className='fab fa-github'></i>
               </a>
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/in/benjamin-gbenimako-81b014a5/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
+                href='https://www.linkedin.com/in/benjamin-gbenimako-81b014a5/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='social-icon'
               >
-                <i className="fab fa-linkedin"></i>
+                <i className='fab fa-linkedin'></i>
               </a>
             </li>
           </ul>

@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import Swal from "sweetalert2";
 import styled from "styled-components";
 import $ from "jquery";
 import { StoryContext } from "../contexts/StoryContext";
@@ -32,12 +33,39 @@ export default function Story(props) {
     };
   }, [callGetStory]);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    background: "#fcb708",
+  });
+
   // post comment handler
-  const handleSubmit = (e) => {
+  const handleCommentSubmit = (e) => {
     e.preventDefault();
-    makeComment(story._id, { text: value });
-    getStory(props.match.params.id);
-    setValue({ text: "" });
+    if (user) {
+      makeComment(story._id, { text: value });
+      getStory(props.match.params.id);
+      setValue({ text: "" });
+    } else {
+      Toast.fire({
+        type: "warning",
+        title: "Sign in to comment on a story",
+      });
+    }
+  };
+
+  const handleLike = () => {
+    if (user) {
+      likeStory(story?._id);
+      getStory(props.match.params.id);
+    } else {
+      Toast.fire({
+        type: "warning",
+        title: "Sign in to like a story",
+      });
+    }
   };
 
   // comment word count
@@ -51,78 +79,75 @@ export default function Story(props) {
   });
 
   return (
-    <SingleStory className="container mt-5">
+    <SingleStory className='container mt-5'>
       {loading ? (
-        <Spinner title="story loading..." />
+        <Spinner title='story loading...' />
       ) : (
         <>
-          <div className="row mx-auto ">
-            <div className="single-p col-sm-12 col-md-6 shadow p-4 mb-4">
-              <p className="title">
+          <div className='row mx-auto '>
+            <div className='single-p col-sm-12 col-md-6 shadow p-4 mb-4'>
+              <p className='title'>
                 <strong>Title: </strong>
                 {story?.title}
               </p>
-              <p className="justify-body">
+              <p className='justify-body'>
                 <strong>Content: </strong> {story?.content}
               </p>
-              <p className="date">
+              <p className='date'>
                 <strong>Date: </strong>
                 {moment(story?.createdAt).fromNow(true)} ago
               </p>
-              <p className="date">
+              <p className='date'>
                 <strong>Story from: </strong>
                 {story?.user?.username}
               </p>
-              <div className="likes">
+              <div className='likes'>
                 {story?.likes?.includes(user?._id) ? (
                   <i
-                    className="fas fa-thumbs-down mr-3"
+                    className='fas fa-thumbs-down mr-3'
                     onClick={() => {
-                      unlikeStory(story?._id);
+                      user && unlikeStory(story?._id);
                       getStory(props.match.params.id);
                     }}
                   ></i>
                 ) : (
                   <i
-                    className="fas fa-thumbs-up"
-                    onClick={() => {
-                      likeStory(story?._id);
-                      getStory(props.match.params.id);
-                    }}
+                    className='fas fa-thumbs-up'
+                    onClick={() => handleLike()}
                   ></i>
                 )}
-                <h4 className="red-text">{story?.likes?.length} likes</h4>
+                <h4 className='red-text'>{story?.likes?.length} likes</h4>
               </div>
             </div>
 
-            <div className="comment-form col-sm-12 col-md-5 offset-md-1">
-              <form onSubmit={handleSubmit} className="">
+            <div className='comment-form col-sm-12 col-md-5 offset-md-1'>
+              <form onSubmit={handleCommentSubmit} className=''>
                 <textarea
-                  maxLength="55"
-                  data-max="55"
-                  type="text"
-                  placeholder="Comment..."
+                  maxLength='55'
+                  data-max='55'
+                  type='text'
+                  placeholder='Comment...'
                   onChange={(e) => setValue(e.target?.value)}
                   required
                 ></textarea>
                 <br />
                 <button>{"Post comment"}</button>
-                <p className="char-max-alert red-text"></p>
+                <p className='char-max-alert red-text'></p>
               </form>
             </div>
           </div>
-          <div className="row mx-auto">
-            <div className="col-sm-12 col-md-6 mt-3 comments p-2">
+          <div className='row mx-auto'>
+            <div className='col-sm-12 col-md-6 mt-3 comments p-2'>
               <h5>
                 {story?.comments?.length > 0 ? "Comments" : "No comments yet"}
               </h5>
               {story?.comments?.map((comment) => {
                 return (
-                  <div className="comment" key={comment._id}>
-                    <p className="">
+                  <div className='comment' key={comment._id}>
+                    <p className=''>
                       <span>{comment?.username} = </span>
                       {comment?.text}
-                      <i className="fas fa-thrash-alt"></i>
+                      <i className='fas fa-thrash-alt'></i>
                     </p>
                   </div>
                 );

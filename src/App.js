@@ -13,18 +13,18 @@ import Signature from "./pages/Signature";
 
 function App() {
   return (
-    <div className="app">
+    <div className='app'>
       <Router>
         <Header />
         <Signature />
         <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <AuthRoute exact path="/dashboard" component={Dashboard} />
-          <AuthRoute exact path="/stories/:id" component={StoryContent} />
-          <AuthRoute exact path="/profile" component={Profile} />
-          <Route exact path="**" component={Notfound} />
+          <Route exact path='/' component={Homepage} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={Signup} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/stories/:id' component={StoryContent} />
+          <AuthRoute exact path='/profile' component={Profile} />
+          <Route exact path='**' component={Notfound} />
         </Switch>
       </Router>
     </div>

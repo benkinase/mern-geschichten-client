@@ -5,21 +5,21 @@ import styled from "styled-components/macro";
 export default function Welcome() {
   return (
     <WelcomeContainer>
-      <div className="welcome container">
-        <div className="col-10 mx-auto text-title text-center">
-          <div className="">
-            <h3 className="bold-text text-popins text-shadow">
+      <div className='welcome container'>
+        <div className='col-10 mx-auto text-title text-center'>
+          <div className=''>
+            <h3 className='bold-text text-popins text-shadow'>
               Welcome back to Geschichten!
             </h3>
-            <div className="mt-2">
+            <div className='mt-2'>
               <p>Please log in to share your stories</p>
               <p>& Enjoy your time on here</p>
             </div>
-            <p className="d-flex justify-content-center mt-5">
-              <Nav.Link href="/signup" className="primary-btn signup-btn mr-1">
+            <p className='d-flex justify-content-center mt-5'>
+              <Nav.Link href='/signup' className='primary-btn signup-btn mr-1'>
                 signup
               </Nav.Link>
-              <Nav.Link href="/login" className="primary-btn login-btn">
+              <Nav.Link href='/login' className='primary-btn login-btn'>
                 login
               </Nav.Link>
             </p>
