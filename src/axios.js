@@ -14,7 +14,7 @@ function AuthHeader() {
 //"http://localhost:5000/",
 // create axios instance
 const instance = axios.create({
-  baseURL: "http://localhost:5000/", // process.env.REACT_APP_BACKEND_URL,
+  baseURL: process.env.REACT_APP_BACKEND_URL,
   headers: AuthHeader(),
 });
 
