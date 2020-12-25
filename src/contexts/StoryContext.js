@@ -66,6 +66,7 @@ const StoryProvider = (props) => {
 
   // get a single story
   async function getStory(id) {
+    console.log(id);
     try {
       dispatch({ type: actionTypes.STORY_DETAILS_REQUEST, payload: id });
       const { data } = await axios.get("/api/stories/" + id);

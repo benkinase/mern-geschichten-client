@@ -21,17 +21,9 @@ export default function Story(props) {
   const [mounted, setMounted] = React.useState(false);
 
   // get single story
-  const callGetStory = React.useCallback(() => {
-    return () => mounted && getStory(props.match.params.id);
-  }, [mounted, getStory, props.match.params.id]);
-
-  React.useEffect(() => {
-    setMounted(true);
-    callGetStory();
-    return () => {
-      setMounted(false);
-    };
-  }, [callGetStory]);
+  // const callGetStory = React.useCallback(() => {
+  //   return () => mounted && getStory(props.match.params.id);
+  // }, [mounted, getStory, props.match.params.id]);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -40,6 +32,17 @@ export default function Story(props) {
     timer: 3000,
     background: "#fcb708",
   });
+
+  const id = props.match.params.id;
+
+  React.useEffect(() => {
+    setMounted(true);
+    //callGetStory();
+    mounted && getStory(id);
+    return () => {
+      setMounted(false);
+    };
+  }, [props.match.params.id, mounted]);
 
   // post comment handler
   const handleCommentSubmit = (e) => {
