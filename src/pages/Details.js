@@ -42,7 +42,7 @@ export default function Story(props) {
     return () => {
       setMounted(false);
     };
-  }, [props.match.params.id, mounted]);
+  }, [id, mounted]);
 
   // post comment handler
   const handleCommentSubmit = (e) => {
